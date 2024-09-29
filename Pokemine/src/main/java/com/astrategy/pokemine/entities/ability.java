@@ -3,21 +3,37 @@ package com.astrategy.pokemine.entities;
 
 public class ability{
 	
-	private String card_id;
-	private int ability_id;
+	private int id ;
+	private String name;
+	private String text;
+	private String type;
 	
-	public String getCard_id() {
-		return card_id;
+	public int getId() {
+		return id;
 	}
-	public void setCard_id(String card_id) {
-		this.card_id = card_id;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getAbility_id() {
-		return ability_id;
+	public String getName() {
+		return name;
 	}
-	public void setAbility_id(int ability_id) {
-		this.ability_id = ability_id;
+	public void setName(String name) {
+		this.name = name;
 	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 	
 	
 
