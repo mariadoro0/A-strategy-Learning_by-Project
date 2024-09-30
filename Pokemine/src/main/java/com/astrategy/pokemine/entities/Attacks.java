@@ -25,9 +25,10 @@ public class Attacks {
 	private int convertedEnergyCost;
 	private String text;
 
+
 	@ManyToMany(mappedBy="attacks")
 	private Set<Card> cards;
 
-	
+
 
 }

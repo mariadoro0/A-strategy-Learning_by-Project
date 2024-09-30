@@ -18,6 +18,8 @@ public class Subtypes {
 	@Id
 	private int id;
 	private String name;
+
 	@ManyToMany(mappedBy = "subtypes")
 	private Set<Card> cards;
+
 }

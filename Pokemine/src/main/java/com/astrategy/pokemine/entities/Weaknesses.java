@@ -21,4 +21,5 @@ public class Weaknesses {
 	@ManyToMany(mappedBy="weaknesses")
 	private Set<Card> cards;
 
+
 }

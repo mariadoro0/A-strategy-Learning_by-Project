@@ -32,16 +32,18 @@ public class Card {
 	
 	private String name;
 
+
 	/*set_num is set as a string because it sometimes contains chars*/
 	@Column(name="set_num")
 	private String setNum;
 	
 	private String supertype;
 
-	/*some cards have level 'X' so we set it as a string*/
+    /*level is set as a String because few cards have level 'X'*/
 	private String level;
-	
-	private int hp;
+
+    /*used Integer instead of int so it accepts NULL values*/
+	private Integer hp;
 	
 	private String evolvesFrom;
 	
@@ -120,4 +122,5 @@ public class Card {
 			inverseJoinColumns = @JoinColumn(name = "subtype_id")
 	)
 	private Set<Subtypes> subtypes;
+
 }

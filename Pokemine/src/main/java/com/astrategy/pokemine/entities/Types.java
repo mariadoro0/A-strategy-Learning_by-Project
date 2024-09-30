@@ -1,6 +1,8 @@
 package com.astrategy.pokemine.entities;
 
+
 import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +18,6 @@ public class Types {
 	private String name;
 	@ManyToMany(mappedBy="types")
 	private Set<Card> cards;
-	
 	
 
 }

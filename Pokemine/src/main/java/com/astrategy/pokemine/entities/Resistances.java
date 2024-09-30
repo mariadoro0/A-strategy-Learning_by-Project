@@ -20,6 +20,8 @@ public class Resistances {
 	private String type;
 	private String value;
 
+
 	@ManyToMany(mappedBy="resistances")
 	private Set<Card> cards;
+
 }
