@@ -18,6 +18,8 @@ public class Weaknesses {
 	private int id;
 	private String type;
 	private String value;
+	@ManyToMany(mappedBy="weaknesses")
+	private Set<Card> cards;
 
 
 }

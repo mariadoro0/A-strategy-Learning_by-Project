@@ -26,4 +26,9 @@ public class Attacks {
 	private String text;
 
 
+	@ManyToMany(mappedBy="attacks")
+	private Set<Card> cards;
+
+
+
 }

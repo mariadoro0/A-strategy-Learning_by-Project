@@ -1,9 +1,7 @@
 package com.astrategy.pokemine.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +17,9 @@ public class Abilities{
 	private String name;
 	private String text;
 	private String type;
+
+	@ManyToMany(mappedBy="abilities")
+	private Set<Card> cards;
 
 	
 

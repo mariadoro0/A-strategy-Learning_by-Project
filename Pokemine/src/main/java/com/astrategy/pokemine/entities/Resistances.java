@@ -21,4 +21,7 @@ public class Resistances {
 	private String value;
 
 
+	@ManyToMany(mappedBy="resistances")
+	private Set<Card> cards;
+
 }
