@@ -2,12 +2,11 @@ package com.astrategy.pokemine.entities;
 
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,14 +31,18 @@ public class Card {
 	private String artist ;
 	
 	private String name;
-	
-	private int setnum;
+
+    /*set_num is set as a string because set_num is not always a number*/
+    @Column(name="set_num")
+	private String setNum;
 	
 	private String supertype;
-	
-	private int level;
-	
-	private int hp;
+
+    /*level is set as a String because few cards have level 'X'*/
+	private String level;
+
+    /*used Integer instead of int so it accepts NULL values*/
+	private Integer hp;
 	
 	private String evolvesFrom;
 	
@@ -64,5 +67,7 @@ public class Card {
 	private String ancientTrait;
 	
 	private String img;
-	
+
+
+
 }
