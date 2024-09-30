@@ -1,10 +1,10 @@
 package com.astrategy.pokemine.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +14,8 @@ public class Types {
 	@Id
 	private int id;
 	private String name;
-	
+	@ManyToMany(mappedBy="types")
+	private Set<Card> cards;
 	
 	
 

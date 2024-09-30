@@ -2,12 +2,11 @@ package com.astrategy.pokemine.entities;
 
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,12 +31,15 @@ public class Card {
 	private String artist ;
 	
 	private String name;
-	
-	private int setnum;
+
+	/*set_num is set as a string because it sometimes contains chars*/
+	@Column(name="set_num")
+	private String setNum;
 	
 	private String supertype;
-	
-	private int level;
+
+	/*some cards have level 'X' so we set it as a string*/
+	private String level;
 	
 	private int hp;
 	
@@ -64,5 +66,58 @@ public class Card {
 	private String ancientTrait;
 	
 	private String img;
-	
+
+	/*relationship between a card and its abilities by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_abilities",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "ability_id")
+	)
+	private Set<Abilities> abilities;
+
+	/*relationship between a card and its attacks by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_attacks",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "attack_id")
+	)
+	private Set<Attacks> attacks;
+
+	/*relationship between a card and its weaknesses by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_weaknesses",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "weakness_id")
+	)
+	private Set<Weaknesses> weaknesses;
+
+	/*relationship between a card and its abilities by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_resistances",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "resistance_id")
+	)
+	private Set<Resistances> resistances;
+
+	/*relationship between a card and its types by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_types",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "type_id")
+	)
+	private Set<Types> type;
+
+	/*relationship between a card and its subtypes by relational table*/
+	@ManyToMany
+	@JoinTable(
+			name = "card_subtypes",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns = @JoinColumn(name = "subtype_id")
+	)
+	private Set<Subtypes> subtypes;
 }
