@@ -112,7 +112,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "type_id")
 	)
-	private Set<Types> type;
+	private Set<Types> types;
 
 	/*relationship between a card and its subtypes by relational table*/
 	@ManyToMany
