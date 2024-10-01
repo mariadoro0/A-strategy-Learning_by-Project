@@ -20,5 +20,13 @@ public class Deck {
 	private String deckName;
 	
 	private String deckDescription;
+
+	public Deck(int userId, String deckName, String deckDescription) {
+		this.userId = userId;
+		this.deckName = deckName;
+		this.deckDescription = deckDescription;
+	}
+	
+	
 	
 }
