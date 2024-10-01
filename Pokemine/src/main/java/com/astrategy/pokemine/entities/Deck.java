@@ -13,12 +13,12 @@ import lombok.Setter;
 public class Deck {
 	
 	@Id
-	private int deck_id;
+	private int deckId;
 	
-	private int user_id;
+	private int userId;
 	
-	private String deck_name;
+	private String deckName;
 	
-	private String deck_description;
+	private String deckDescription;
 	
 }
