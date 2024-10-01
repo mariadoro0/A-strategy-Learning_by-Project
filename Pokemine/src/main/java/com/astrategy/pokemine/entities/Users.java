@@ -6,12 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name="users")
+@NoArgsConstructor
 public class Users {
 
 	@Id
@@ -26,7 +28,7 @@ public class Users {
 		this.email = email;
 		this.password = password;
 	}
-	
-	
-	
+
+
+
 }
