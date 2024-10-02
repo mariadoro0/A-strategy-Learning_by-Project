@@ -26,7 +26,9 @@ public class Deck {
 		this.deckName = deckName;
 		this.deckDescription = deckDescription;
 	}
-	
-	
-	
+
+
+	public Deck() {
+
+	}
 }
