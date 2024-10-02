@@ -1,5 +1,7 @@
 package com.astrategy.pokemine.entities;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -24,17 +26,16 @@ public class Users {
 	private int id;	
 	private String username;
 	private String email;
-	private String password;
+	private String password; //dobbiamo fare il getter di password ?
 	
 	public Users(String username, String email, String password) {
 		this.username = username;
-		this.email = email;
+		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
 		this.password = password;
 	}
 
 	@OneToMany(mappedBy = "users")
-	@JsonIgnore
-	private UserCollection usersCollection ;
+	private Set<UserCollection> usersCollection ;
 
 
 
