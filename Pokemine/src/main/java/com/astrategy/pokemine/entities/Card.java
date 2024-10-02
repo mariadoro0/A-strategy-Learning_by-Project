@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 @Getter
@@ -31,8 +33,8 @@ public class Card {
 	private String artist ;
 	
 	private String name;
-
-
+	@OneToMany(mappedBy = "cards")
+	private Set<UserCollection> userCollection ;
 	/*set_num is set as a string because it sometimes contains chars*/
 	@Column(name="set_num")
 	private String setNum;

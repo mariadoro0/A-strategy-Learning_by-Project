@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class CollectionKeys implements Serializable {
+public class CollectionId implements Serializable {
 
-    private int userId;
+    private static final long serialVersionUID = 1L;
+    @Column(name = "user_id")
+	private int userId;
+    @Column(name ="card_id")
     private String cardId;
     
 	public int getUserId() {
@@ -28,7 +32,7 @@ public class CollectionKeys implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CollectionKeys that = (CollectionKeys) o;
+        CollectionId that = (CollectionId) o;
         return Objects.equals(userId, that.userId) &&
                Objects.equals(cardId, that.cardId);
     }
