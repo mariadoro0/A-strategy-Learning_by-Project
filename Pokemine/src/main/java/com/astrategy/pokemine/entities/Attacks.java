@@ -19,7 +19,7 @@ public class Attacks {
 	
 	@Id
 	private int id;
-	private String attack_name;
+	private String attackName;
 	private String cost;
 	private int damage;
 	private int convertedEnergyCost;
