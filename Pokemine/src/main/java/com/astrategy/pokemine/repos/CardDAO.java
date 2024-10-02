@@ -13,6 +13,7 @@ public interface CardDAO extends JpaRepository<Card, String> {
     List<Card> findBySetName(String set);
     List<Card> findByRarity(String rarity);
     List<Card> findBySupertype(String supertype);
+    List<Card> findByTypes_Id(int typeId);
 
 
 }
