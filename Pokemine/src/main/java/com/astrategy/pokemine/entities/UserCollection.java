@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
+import jakarta.persistence.*;
 @Getter
 @Setter
 @Entity
@@ -23,8 +23,8 @@ public class UserCollection {
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Users users;
-	
-	
+
+	@Column(name ="quantity")
 	private int quantity ;
 	
 	
