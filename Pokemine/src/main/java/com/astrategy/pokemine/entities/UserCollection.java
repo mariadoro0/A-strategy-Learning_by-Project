@@ -7,6 +7,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 @Getter
 @Setter
@@ -18,10 +21,15 @@ public class UserCollection {
 	private CollectionId id;
 	
 	@ManyToOne
-	@JoinColumn(name="cardId")
+	@MapsId("cardId")
+	@JoinColumn(name="card_id")
+	@JsonIgnore
 	private Card cards ;
+	
 	@ManyToOne
-	@JoinColumn(name="userId")
+	@MapsId("userId")
+	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private Users users;
 
 	@Column(name ="quantity")
