@@ -1,30 +1,40 @@
 package com.astrategy.pokemine.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "decks")
 public class Deck {
-	
+
 	@Id
-	private int deckId;
-	
-	private int userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "deck_id", nullable = false)
+	private Integer id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private Users user;
 	
 	private String deckName;
 	
 	private String deckDescription;
 
-	public Deck(int userId, String deckName, String deckDescription) {
-		this.userId = userId;
+	@OneToMany(mappedBy = "deck")
+	private Set<DeckCard> deckCards;
+
+	public Deck(Users userId, String deckName, String deckDescription) {
+		this.user = userId;
 		this.deckName = deckName;
 		this.deckDescription = deckDescription;
+		this.deckCards = new LinkedHashSet<>();
 	}
 
 
