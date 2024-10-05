@@ -22,13 +22,13 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public List<Users> getbyemail(String email) {
+	public List<Users> getByEmail(String email) {
 		
 		return dao.findbyemail(email);
 	}
 
 	@Override
-	public void getupdateUser(Users user) {
+	public void updateUser(Users user) {
 		dao.updateUser(user);
 		
 	}
