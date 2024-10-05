@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name="types")
 public class Types {
 	@Id
-	private int id;
+	private Integer id;
 	private String name;
 	@ManyToMany(mappedBy="types")
 	private Set<Card> cards;

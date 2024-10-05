@@ -8,8 +8,8 @@ public interface UsersService {
 
 	
 	void addUser(Users user);
+
+	List<Users> getByEmail(String email);
 	
-	List<Users> getbyemail(String email);
-	
-	void getupdateUser(Users user);
+	void updateUser(Users user);
 }
