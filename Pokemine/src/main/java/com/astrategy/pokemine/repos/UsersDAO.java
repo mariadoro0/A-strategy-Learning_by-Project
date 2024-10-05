@@ -12,11 +12,11 @@ import com.astrategy.pokemine.entities.Users;
 public interface UsersDAO extends JpaRepository<Users, Integer>{
 	
 	//Create
-	void addUser(Users user);
+	//void addUser(Users user);
 	
 	//Read
 	
-	//List<Users> findbyemail(String email);
+	List<Users> findbyemail(String email);
 	//findbyname
 	
 	//update
