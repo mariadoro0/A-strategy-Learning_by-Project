@@ -6,21 +6,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.yaml.snakeyaml.events.Event.ID;
 
-import com.astrategy.pokemine.entities.Users;
+import com.astrategy.pokemine.entities.User;
 
 @Repository
-public interface UsersDAO extends JpaRepository<Users, Integer>{
+public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	//Create
 	//void addUser(Users user);
 	
 	//Read
 	
-	List<Users> findbyemail(String email);
+	List<User> findbyemail(String email);
 	//findbyname
 	
 	//update
-	void updateUser(Users user);
+	void updateUser(User user);
 	
 	
 	//delete

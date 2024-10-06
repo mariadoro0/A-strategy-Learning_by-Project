@@ -19,7 +19,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="users")
 @NoArgsConstructor
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Users {
 	private String email;
 	private String password; //dobbiamo fare il getter di password ?
 	
-	public Users(String username, String email, String password) {
+	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
 		this.password = password;

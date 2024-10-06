@@ -21,7 +21,7 @@ public class Deck {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private Users user;
+	private User user;
 	
 	private String deckName;
 	
@@ -30,7 +30,7 @@ public class Deck {
 	@OneToMany(mappedBy = "deck")
 	private Set<DeckCard> deckCards;
 
-	public Deck(Users userId, String deckName, String deckDescription) {
+	public Deck(User userId, String deckName, String deckDescription) {
 		this.user = userId;
 		this.deckName = deckName;
 		this.deckDescription = deckDescription;

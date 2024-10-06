@@ -8,11 +8,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class CollectionId implements Serializable {
+public class UserCollectionId implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Column(name = "user_id")
 	private int userId;
+    
     @Column(name ="card_id")
     private String cardId;
     
@@ -32,7 +34,7 @@ public class CollectionId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CollectionId that = (CollectionId) o;
+        UserCollectionId that = (UserCollectionId) o;
         return Objects.equals(userId, that.userId) &&
                Objects.equals(cardId, that.cardId);
     }
