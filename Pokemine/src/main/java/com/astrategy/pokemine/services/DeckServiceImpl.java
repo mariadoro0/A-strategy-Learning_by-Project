@@ -36,7 +36,8 @@ public class DeckServiceImpl implements DeckService {
     @Override
     public void addCardToDeck(DeckCardId dcId) {
         //check to see if the given deck and card exist
-        Deck deck = findDeckById(dcId.getDeckId());
+        Deck deck = findDeckById(dcId.getDeckId())
+                .orElseThrow(() -> new IllegalArgumentException("Deck not found with id: " + dcId.getDeckId()));
         Card card = cardDAO.findById(dcId.getCardId())
                 .orElseThrow(() -> new IllegalArgumentException("Card not found with id: " + dcId.getCardId()));
 
@@ -68,31 +69,76 @@ public class DeckServiceImpl implements DeckService {
 
     @Override
     public void removeCardFromDeck(DeckCardId dcId) {
+        // checks if the deck and the card exist
+        Deck deck = findDeckById(dcId.getDeckId())
+                .orElseThrow(() -> new IllegalArgumentException("Deck not found with id: " + dcId.getDeckId()));;
+        Card card = cardDAO.findById(dcId.getCardId())
+                .orElseThrow(() -> new IllegalArgumentException("Card not found with id: " + dcId.getCardId()));
 
+        //checks for the record of the card
+        Optional<DeckCard> record = deckCardDAO.findById(dcId);
+        DeckCard cardToAdd;
+        if (record.isPresent()) {
+            cardToAdd = record.get();
+            // if quantity is =1, deletes the record
+            if (cardToAdd.getQuantity() == 1){
+                deckCardDAO.delete(cardToAdd);
+            }else {
+                // else reduces the quantity
+                cardToAdd.setQuantity(cardToAdd.getQuantity() - 1);
+            }
+            deckCardDAO.save(cardToAdd);
+        } else {
+            // no record of the card in the deck
+            throw new IllegalArgumentException("Card in deck not found with id: " + dcId.getCardId());
+        }
     }
 
     @Override
     public List<Deck> getDecksByUser(int userId) {
-        return List.of();
+        return deckDAO.findByUserId(userId);
     }
 
     @Override
     public boolean validateDeck(int deckId) {
-        return false;
+        Deck deck = findDeckById(deckId).orElseThrow(() -> new IllegalArgumentException("Deck not found with id: " + deckId));
+        //if there are 60 cards and at least one Basic Pokémon, it is valid
+        // so it comes back true
+        return deckCount(deck) && checkBaseCard(deck);
+
+    }
+
+    // this method checks the number of cards in the deck: to be valid it must be 60
+    public boolean deckCount(Deck deck){
+        int sum = deck.getDeckCards().stream()
+                .mapToInt(DeckCard::getQuantity)
+                .sum();
+        return sum == 60;
+    }
+
+    // this method checks if there is at least one Basic Pokémon in the deck
+    public boolean checkBaseCard(Deck deck){
+        return deck.getDeckCards().stream()
+                .map(DeckCard::getCard)
+                .filter(card -> card.getSupertype().equals("Pokémon"))
+                .flatMap(card -> card.getSubtypes().stream())
+                .anyMatch(subtype -> subtype.getName().equals("Basic"));
     }
 
     @Override
-    public List<Card> getDeckCardsByDeckId(int deckId) {
-        return List.of();
+    public List<DeckCard> getDeckCardsByDeckId(int deckId) {
+        Deck deck = deckDAO.findById(deckId).orElseThrow(() -> new IllegalArgumentException("Deck not found with id: " + deckId));
+        return deckCardDAO.findByDeck(deck);
     }
 
     @Override
-    public Deck findDeckById(int deckId) {
-        return null;
+    public Optional<Deck> findDeckById(int deckId) {
+        return deckDAO.findById(deckId);
     }
 
     @Override
     public void deleteDeck(int deckId) {
+        deckDAO.deleteById(deckId);
 
     }
 }

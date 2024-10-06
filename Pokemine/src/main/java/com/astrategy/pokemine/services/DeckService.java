@@ -1,11 +1,11 @@
 package com.astrategy.pokemine.services;
 
-import com.astrategy.pokemine.entities.Card;
 import com.astrategy.pokemine.entities.Deck;
 import com.astrategy.pokemine.entities.DeckCard;
 import com.astrategy.pokemine.entities.DeckCardId;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeckService {
     void createDeck(int userId, String deckName, String deckDescription); // Crea un mazzo con le carte dalla collezione personale
@@ -13,7 +13,7 @@ public interface DeckService {
     void removeCardFromDeck(DeckCardId dcId); // Rimuove una carta da un mazzo esistente
     List<Deck> getDecksByUser(int userId); // Ritorna tutti i mazzi creati dall'utente
     boolean validateDeck(int deckId); // Verifica che il mazzo sia conforme al regolamento
-    List<Card> getDeckCardsByDeckId(int deckId);
-    Deck findDeckById(int deckId);
+    List<DeckCard> getDeckCardsByDeckId(int deckId);
+    Optional<Deck> findDeckById(int deckId);
     void deleteDeck(int deckId);
 }
