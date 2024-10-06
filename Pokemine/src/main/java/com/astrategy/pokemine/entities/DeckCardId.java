@@ -24,6 +24,13 @@ public class DeckCardId implements Serializable {
     @Column(name = "card_id", nullable = false, length = 50)
     private String cardId;
 
+    public DeckCardId(DeckCardId dcId) {
+    }
+
+    public DeckCardId() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
