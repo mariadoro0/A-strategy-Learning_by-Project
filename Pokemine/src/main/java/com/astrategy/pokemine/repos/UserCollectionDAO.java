@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CollectionDAO extends JpaRepository<UserCollection, CollectionId> {
+public interface UserCollectionDAO extends JpaRepository<UserCollection, CollectionId> {
 	
-	  // Trova la collezione dell'utente autenticato (username/email) fatto da CHATGPT, ti mando anche il resto tra poco.
-    UserCollection findByUsername(String username);
+	  // Trova la collezione dell'utente autenticato
+    UserCollection findByUserId(int userId);
 
     // Trova tutte le carte possedute dall'utente (attraverso la collezione)
-    List<Card> findCarteByUsername(String username);
+    List<Card> findCarteByUserId(int userId);
    
 
 }
