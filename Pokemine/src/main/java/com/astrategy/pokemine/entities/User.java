@@ -2,7 +2,9 @@ package com.astrategy.pokemine.entities;
 
 import java.util.Set;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +15,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import jakarta.persistence.*;
+
 @Getter
 @Setter
 @Entity
@@ -33,6 +37,7 @@ public class User {
 		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
 		this.password = password;
 	}
+
 
 	@OneToMany(mappedBy = "users")
 	private Set<UserCollection> usersCollection ;

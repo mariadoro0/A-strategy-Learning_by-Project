@@ -13,6 +13,7 @@ import com.astrategy.pokemine.repos.UserDAO;
 public class UsersServiceImpl implements UsersService{
 	@Autowired 
 	private UserDAO dao; 
+
 	
 	
 	@Override
