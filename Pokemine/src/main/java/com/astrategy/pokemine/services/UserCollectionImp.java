@@ -18,7 +18,8 @@ public class UserCollectionImp implements UserCollectionService {
 	private UserCollectionDAO dao;
 	@Autowired 
 	private UserDAO usrdao;
-	@Autowired CardDAO carddao;
+	@Autowired 
+	private CardDAO carddao;
 	@Override
 	public void addCardToColletion(UserCollectionId cid) {
 		// TODO Auto-generated method stub
