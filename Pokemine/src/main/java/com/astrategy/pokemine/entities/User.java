@@ -2,8 +2,6 @@ package com.astrategy.pokemine.entities;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,13 +11,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
 @Getter
 @Setter
 @Entity
 @Table(name="users")
 @NoArgsConstructor
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,13 +26,13 @@ public class Users {
 	private String email;
 	private String password; //dobbiamo fare il getter di password ?
 	
-	public Users(String username, String email, String password) {
+	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
 		this.password = password;
 	}
 
-	@OneToMany(mappedBy = "users")
+	@OneToMany(mappedBy = "user")
 	private Set<UserCollection> usersCollection ;
 
 

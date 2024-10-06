@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ public class Deck {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private Users user;
+	private User user;
 	
 	private String deckName;
 	
@@ -30,7 +29,7 @@ public class Deck {
 	@OneToMany(mappedBy = "deck")
 	private Set<DeckCard> deckCards;
 
-	public Deck(Users userId, String deckName, String deckDescription) {
+	public Deck(User userId, String deckName, String deckDescription) {
 		this.user = userId;
 		this.deckName = deckName;
 		this.deckDescription = deckDescription;

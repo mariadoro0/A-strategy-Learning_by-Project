@@ -2,14 +2,14 @@ package com.astrategy.pokemine.services;
 
 import java.util.List;
 
-import com.astrategy.pokemine.entities.Users;
+import com.astrategy.pokemine.entities.User;
 
 public interface UsersService {
 
 	
-	void addUser(Users user);
+	void addUser(User user);
 
-	List<Users> getByEmail(String email);
+	List<User> getByEmail(String email);
 	
-	void updateUser(Users user);
+	void updateUser(User user);
 }
