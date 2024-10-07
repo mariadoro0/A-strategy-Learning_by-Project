@@ -69,4 +69,10 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		return dao.findByUserId(usrdao.findById(UserId));
 	}
 
+	@Override
+	public void addCardToCollection(UserCollectionId uid) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

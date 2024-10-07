@@ -73,4 +73,10 @@ public class CardServiceImpl implements CardService {
 		// TODO Auto-generated method stub
 		return dao.findByName(name);
 	}
+
+	@Override
+	public Card getCard(String cardId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
