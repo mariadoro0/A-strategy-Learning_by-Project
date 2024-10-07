@@ -12,7 +12,7 @@ import com.astrategy.pokemine.repos.CardDAO;
 import com.astrategy.pokemine.repos.UserCollectionDAO;
 import com.astrategy.pokemine.repos.UserDAO;
 
-public class UserCollectionImp implements UserCollectionService {
+public class UserCollectionServiceImp implements UserCollectionService {
 
 	@Autowired
 	private UserCollectionDAO dao;
