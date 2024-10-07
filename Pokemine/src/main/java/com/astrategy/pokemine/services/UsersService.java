@@ -9,7 +9,7 @@ public interface UsersService {
 	
 	void addUser(User user);
 
-	List<User> getByEmail(String email);
+	User getByEmail(String email);
 	
 	void updateUser(User user);
 }

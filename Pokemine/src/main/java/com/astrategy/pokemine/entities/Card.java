@@ -2,12 +2,10 @@ package com.astrategy.pokemine.entities;
 
 
 
-import jakarta.persistence.*;
+ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 @Getter
@@ -19,7 +17,7 @@ public class Card {
 	@Id
 	private String id;
 	
-	private String setName;
+	private String set;
 	
 	private String series;
 	
@@ -33,8 +31,8 @@ public class Card {
 	private String artist ;
 	
 	private String name;
-	@OneToMany(mappedBy = "cards")
-	private Set<UserCollection> userCollection ;
+
+
 	/*set_num is set as a string because it sometimes contains chars*/
 	@Column(name="set_num")
 	private String setNum;
@@ -42,7 +40,7 @@ public class Card {
 	private String supertype;
 
     /*level is set as a String because few cards have level 'X'*/
-	private String cardLevel;
+	private String level;
 
     /*used Integer instead of int so it accepts NULL values*/
 	private Integer hp;
