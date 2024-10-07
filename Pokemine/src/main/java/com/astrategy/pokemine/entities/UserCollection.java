@@ -18,7 +18,7 @@ import jakarta.persistence.*;
 public class UserCollection {
 
 	@EmbeddedId
-	private CollectionId id;
+	private UserCollectionId id;
 	
 	@ManyToOne
 	@MapsId("cardId")
@@ -30,7 +30,9 @@ public class UserCollection {
 	@MapsId("userId")
 	@JoinColumn(name="user_id")
 	@JsonIgnore
-	private User user;
+
+	private User users;
+
 
 	@Column(name ="quantity")
 	private int quantity ;
