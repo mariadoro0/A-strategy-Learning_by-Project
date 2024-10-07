@@ -24,18 +24,19 @@ public class UserCollection {
 	@MapsId("cardId")
 	@JoinColumn(name="card_id")
 	@JsonIgnore
-	private Card cards ;
+	private Card card ;
 	
 	@ManyToOne
 	@MapsId("userId")
 	@JoinColumn(name="user_id")
 	@JsonIgnore
 
-	private User users;
+	private User user;
 
 
 	@Column(name ="quantity")
 	private int quantity ;
-	
-	
+
+
+
 }

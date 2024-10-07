@@ -11,7 +11,9 @@ import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.repos.CardDAO;
 import com.astrategy.pokemine.repos.UserCollectionDAO;
 import com.astrategy.pokemine.repos.UserDAO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserCollectionServiceImp implements UserCollectionService {
 
 	@Autowired
@@ -36,7 +38,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 				throw new IllegalArgumentException("Utente o carta non trovati");}
 			
 			UserCollection userCollection = new UserCollection();
-			userCollection.setId(uid);
+			userCollection.setId(cid);
 			userCollection.setUser(user); //setta l'utenete
 			userCollection.setCard(card); //setta la carta
 			userCollection.setQuantity(1); // setta quantità a uno
@@ -45,8 +47,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	}
 
 	@Override
-	public void removeCardToColletion(UserCollectionId Cid) {
-		// TODO Auto-generated method stub
+	public void removeCardToColletion(UserCollectionId cid) {
 		Optional<UserCollection> OuserCollection = dao.findById(cid);
 		if(OuserCollection.isPresent()) {
 			UserCollection userCollection = OuserCollection.get();
