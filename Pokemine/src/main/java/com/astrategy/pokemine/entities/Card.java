@@ -32,7 +32,6 @@ public class Card {
 	
 	private String name;
 
-
 	/*set_num is set as a string because it sometimes contains chars*/
 	@Column(name="set_num")
 	private String setNum;
@@ -68,6 +67,9 @@ public class Card {
 	private String ancientTrait;
 	
 	private String img;
+
+	@OneToMany(mappedBy = "cards")
+	private Set<UserCollection> userCollection ;
 
 	/*relationship between a card and its abilities by relational table*/
 	@ManyToMany
