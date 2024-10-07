@@ -51,7 +51,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> getCardByGenerationByArtistBySetNameByRarityBySupertypeByType_Id(String generation, String artist, String set, String rarity, String supertype, Integer typeId) {
+    public List<Card> getCardByGenerationByArtistBySetNameByRarityBySupertypeByType_Id(String generation, String artist, String set, String rarity, String supertype, Integer typeId, String name) {
         return dao.findAll().stream()
                 .filter(card -> generation == null || generation.isEmpty() || card.getGeneration().equals(generation))
                 .filter(card -> artist == null || artist.isEmpty() || card.getArtist().equals(artist))
@@ -59,6 +59,18 @@ public class CardServiceImpl implements CardService {
                 .filter(card -> rarity == null || rarity.isEmpty() || card.getRarity().equals(rarity))
                 .filter(card -> supertype == null || supertype.isEmpty() || card.getSupertype().equals(supertype))
                 .filter(card -> typeId == null || card.getTypes().stream().anyMatch(type -> type.getId().equals(typeId)))
+                .filter(card -> name == null || name.isEmpty()||card.getName().equals(name))
                 .collect(Collectors.toList());
     }
+
+	public List<Card> getAllCards() {
+		// TODO Auto-generated method stub
+		return dao.findAll();
+	}
+
+	@Override
+	public Card getCardByName(String name) {
+		// TODO Auto-generated method stub
+		return dao.findByName(name);
+	}
 }
