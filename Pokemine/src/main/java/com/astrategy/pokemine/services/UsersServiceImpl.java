@@ -1,6 +1,7 @@
 package com.astrategy.pokemine.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,30 @@ public class UsersServiceImpl implements UsersService{
 
 	
 	
+	
+	@Autowired 
+	private UsersService service;
+	
+
 	@Override
 	public void addUser(User user) {
+		
+		boolean existingUserByEmail = dao.existsByEmail(user.getEmail());
+		if(existingUserByEmail) {
+			throw new RuntimeException("Un utente esiste già con questa email");
+		}
+		
+		boolean existingUserByUsername = dao.existsByUsername(user.getUsername());
+		if(existingUserByUsername) {
+			throw new RuntimeException("Un utente esiste già con questa email");
+		}
+		
 		dao.save(user);
 		
 	}
 
 	@Override
-	public List<User> getByEmail(String email) {
+	public User getByEmail(String email) {
 		
 		return dao.findbyemail(email);
 	}

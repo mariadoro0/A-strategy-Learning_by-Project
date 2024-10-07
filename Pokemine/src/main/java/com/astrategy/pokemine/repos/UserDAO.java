@@ -16,7 +16,7 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	//Read
 	
-	List<User> findbyemail(String email);
+	User findbyemail(String email);
 	//findbyname
 	
 	//update
@@ -25,6 +25,10 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	//delete
 	//void deleteById(ID id);	
+	
+	boolean existsByEmail(String email);
+    
+	boolean existsByUsername(String username);
 	
 	
 	
