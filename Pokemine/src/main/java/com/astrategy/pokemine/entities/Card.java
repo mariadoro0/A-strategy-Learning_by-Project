@@ -17,7 +17,7 @@ public class Card {
 	@Id
 	private String id;
 	
-	private String set;
+	private String setName;
 	
 	private String series;
 	
@@ -40,7 +40,7 @@ public class Card {
 	private String supertype;
 
     /*level is set as a String because few cards have level 'X'*/
-	private String level;
+	private String cardLevel;
 
     /*used Integer instead of int so it accepts NULL values*/
 	private Integer hp;
