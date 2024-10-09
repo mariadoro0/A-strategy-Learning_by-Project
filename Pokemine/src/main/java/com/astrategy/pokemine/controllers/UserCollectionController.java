@@ -49,7 +49,7 @@ public ResponseEntity<String> addCard(@RequestBody UserCollectionId uid) {
     }
 
     // Controlla se la carta esiste
-    Card card = cardService.getCard(uid.getCardId());
+    Card card = cardService.getCardById(uid.getCardId());
     if (card == null) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carta non trovata");
     }
