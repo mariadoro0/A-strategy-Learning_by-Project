@@ -42,14 +42,10 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public User getByEmail(String email) {
 		
-		return dao.findbyemail(email);
+		return dao.findByEmail(email);
 	}
 
-	@Override
-	public void updateUser(User user) {
-		dao.updateUser(user);
-		
-	}
+	
 
 	
 }

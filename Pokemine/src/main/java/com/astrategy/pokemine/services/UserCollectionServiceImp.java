@@ -39,8 +39,8 @@ public class UserCollectionServiceImp implements UserCollectionService {
 			
 			UserCollection userCollection = new UserCollection();
 			userCollection.setId(cid);
-			userCollection.setUser(user); //setta l'utenete
-			userCollection.setCard(card); //setta la carta
+			userCollection.setUsers(user); //setta l'utenete
+			userCollection.setCards(card); //setta la carta
 			userCollection.setQuantity(1); // setta quantità a uno
 			dao.save(userCollection);
 		}
@@ -66,7 +66,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Override
 	public UserCollection getUserCollection(int UserId) {
 		// TODO Auto-generated method stub
-		return dao.findByUserId(usrdao.findById(UserId));
+		return dao.findById(usrdao.findById(UserId));
 	}
 
 }
