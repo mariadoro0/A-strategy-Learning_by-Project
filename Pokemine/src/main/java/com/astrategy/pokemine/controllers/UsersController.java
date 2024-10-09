@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.services.UsersService;
 
-public class UsersController {
+public class UserController {
 	 
 	@Autowired
 	 private UsersService userService;
