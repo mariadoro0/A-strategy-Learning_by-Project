@@ -23,7 +23,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Autowired 
 	private CardDAO carddao;
 	@Override
-	public void addCardToColletion(UserCollectionId cid) {
+	public void addCardToCollection(UserCollectionId cid) {
 		// TODO Auto-generated method stub
 		Optional<UserCollection> usercollection = dao.findById(cid);
 		if (usercollection.isPresent()) {
@@ -47,7 +47,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	}
 
 	@Override
-	public void removeCardToColletion(UserCollectionId cid) {
+	public void removeCardToCollection(UserCollectionId cid) {
 		Optional<UserCollection> OuserCollection = dao.findById(cid);
 		if(OuserCollection.isPresent()) {
 			UserCollection userCollection = OuserCollection.get();
@@ -69,10 +69,6 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		return dao.findByUserId(usrdao.findById(UserId));
 	}
 
-	@Override
-	public void addCardToCollection(UserCollectionId uid) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }
