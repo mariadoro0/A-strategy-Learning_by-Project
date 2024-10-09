@@ -6,9 +6,9 @@ import com.astrategy.pokemine.entities.UserCollection;
 public interface UserCollectionService {
 
 	
-	void addCardToColletion(UserCollectionId cid);
-	void removeCardToColletion(UserCollectionId Cid);
+	void addCardToCollection(UserCollectionId cid);
+	void removeCardToCollection(UserCollectionId Cid);
 	UserCollection getUserCollection(int UserId);
-	void addCardToCollection(UserCollectionId uid);
+
 	
 }
