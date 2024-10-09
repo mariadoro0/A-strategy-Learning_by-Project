@@ -7,7 +7,7 @@ import com.astrategy.pokemine.entities.Card;
 
 public interface CardService {
 	
-        Optional<Card> getCardById(String id);
+        Card getCardById(String id);
         List<Card> getCardByGeneration(String generation);
         List<Card> getCardByArtist(String artist);
         List<Card> getCardBySetName(String set);
