@@ -2,7 +2,9 @@ package com.astrategy.pokemine.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Nationalized;
@@ -14,6 +16,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeckCardId implements Serializable {
     @Serial
     private static final long serialVersionUID = 820457611589241517L;
@@ -24,12 +28,6 @@ public class DeckCardId implements Serializable {
     @Column(name = "card_id", nullable = false, length = 50)
     private String cardId;
 
-    public DeckCardId(DeckCardId dcId) {
-    }
-
-    public DeckCardId() {
-
-    }
 
     @Override
     public boolean equals(Object o) {

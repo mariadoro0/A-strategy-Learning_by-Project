@@ -16,8 +16,8 @@ public class CardServiceImpl implements CardService {
     private CardDAO dao;
 
     @Override
-    public Optional<Card> getCardById(String id) {
-        return dao.findById(id);
+    public Card getCardById(String id) {
+        return dao.findById(id).orElseThrow(()-> new IllegalArgumentException("Card not found"));
     }
 
     @Override
@@ -73,4 +73,6 @@ public class CardServiceImpl implements CardService {
 		// TODO Auto-generated method stub
 		return dao.findByName(name);
 	}
+
+	
 }
