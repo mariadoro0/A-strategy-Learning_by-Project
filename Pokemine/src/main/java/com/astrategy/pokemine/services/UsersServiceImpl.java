@@ -11,7 +11,7 @@ import com.astrategy.pokemine.repos.UserDAO;
 
 
 @Service
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UserService{
 	@Autowired 
 	private UserDAO dao; 
 
@@ -19,7 +19,7 @@ public class UsersServiceImpl implements UsersService{
 	
 	
 	@Autowired 
-	private UsersService service;
+	private UserService service;
 	
 
 	@Override
@@ -49,6 +49,12 @@ public class UsersServiceImpl implements UsersService{
 	public void updateUser(User user) {
 		dao.updateUser(user);
 		
+	}
+
+	@Override
+	public Optional<User> getUserById(int userId) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
 	
