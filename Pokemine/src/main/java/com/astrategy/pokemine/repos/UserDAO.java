@@ -16,11 +16,11 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	//Read
 	
-	User findbyemail(String email);
+	User findByEmail(String email);
 	//findbyname
 	
 	//update
-	void updateUser(User user);
+	//void updateUser(User user);
 	
 	
 	//delete

@@ -42,13 +42,7 @@ public class UsersServiceImpl implements UserService{
 	@Override
 	public User getByEmail(String email) {
 		
-		return dao.findbyemail(email);
-	}
-
-	@Override
-	public void updateUser(User user) {
-		dao.updateUser(user);
-		
+		return dao.findByEmail(email);
 	}
 
 	@Override
@@ -56,6 +50,8 @@ public class UsersServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
+
+	
 
 	
 }

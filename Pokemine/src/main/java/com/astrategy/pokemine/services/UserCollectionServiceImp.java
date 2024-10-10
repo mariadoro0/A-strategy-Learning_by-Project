@@ -66,7 +66,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Override
 	public UserCollection getUserCollection(int UserId) {
 		// TODO Auto-generated method stub
-		return dao.findByUserId(usrdao.findById(UserId));
+		return dao.findById(usrdao.findById(UserId));
 	}
 
 
