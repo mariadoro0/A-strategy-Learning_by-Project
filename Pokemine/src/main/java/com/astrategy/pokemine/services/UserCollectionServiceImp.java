@@ -40,7 +40,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 			UserCollection userCollection = new UserCollection();
 			userCollection.setId(cid);
 			userCollection.setUser(user); //setta l'utenete
-			userCollection.setCards(card); //setta la carta
+			userCollection.setCard(card); //setta la carta
 			userCollection.setQuantity(1); // setta quantità a uno
 			dao.save(userCollection);
 		}
