@@ -3,19 +3,22 @@ package com.astrategy.pokemine.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.astrategy.pokemine.entities.User;
-import com.astrategy.pokemine.services.UsersService;
+import com.astrategy.pokemine.services.UserService;
 
-public class UserController {
+@RestController
+@RequestMapping("pokemon")
+public class UsersController {
 	 
 	@Autowired
-	 private UsersService userService;
-	
-	@Autowired
-	 private User user;
+	private UserService userService;
+
 	
 	@PostMapping("add")
     public ResponseEntity<String> add(@RequestBody User user) {
@@ -26,7 +29,19 @@ public class UserController {
             return new ResponseEntity<>("Error creating user: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-		
+	
+	
+	//da provare non so se ho fatto giusto
+	@GetMapping("delete")
+	public ResponseEntity<String> delete(@RequestBody int id){
+		try {
+            userService.deleteById(id);
+            return new ResponseEntity<>("User deleted successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error id not present: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 	}
+		
+}
 
 

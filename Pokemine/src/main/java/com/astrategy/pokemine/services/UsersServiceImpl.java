@@ -16,12 +16,7 @@ public class UsersServiceImpl implements UserService{
 	private UserDAO dao; 
 
 	
-	
-	
-	@Autowired 
-	private UserService service;
-	
-
+	// Method to add a new user, ensuring that no user with the same email or username already exists
 	@Override
 	public void addUser(User user) {
 		
@@ -38,17 +33,43 @@ public class UsersServiceImpl implements UserService{
 		dao.save(user);
 		
 	}
+	
 
+	// Method to retrieve a user by their email address
 	@Override
 	public User getByEmail(String email) {
 		
 		return dao.findByEmail(email);
 	}
 
+	// Method to retrieve a user by their ID
 	@Override
 	public Optional<User> getUserById(int userId) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
+	}
+	
+	// Method to update user details
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	// Method to delete a user by their ID, with a check if the user exists
+	@Override
+	public void deleteById(int id) {
+		
+		 Optional<User> existingUser = dao.findById(id);
+		    
+		   if (!existingUser.isPresent()) {
+		       
+		        throw new RuntimeException("L'utente non esiste e non può essere cancellato");
+		        
+		    }
+
+		   dao.deleteById(id);
 	}
 
 	
