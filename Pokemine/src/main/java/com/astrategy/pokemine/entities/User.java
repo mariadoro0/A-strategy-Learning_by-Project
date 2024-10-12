@@ -18,8 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
-
 @Getter
 @Setter
 @Entity
@@ -33,17 +31,18 @@ public class User {
 	private int id ;	
 	private String username;
 	private String email;
-	private String password; //dobbiamo fare il getter di password ?
+	@JsonIgnore
+	private String password;
 	
 	public User(String username, String email, String password) {
 		this.username = username;
-		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
+		this.email = email;
 		this.password = password;
 	}
 
 
 	@OneToMany(mappedBy = "users")
-	private Set<UserCollection> usersCollection ;
+	private Set<UserCollection> userCollection ;
 
 
 
