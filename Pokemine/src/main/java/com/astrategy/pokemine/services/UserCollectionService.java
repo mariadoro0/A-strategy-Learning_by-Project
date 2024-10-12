@@ -9,6 +9,6 @@ public interface UserCollectionService {
 	void addCardToCollection(UserCollectionId cid);
 	void removeCardToCollection(UserCollectionId Cid);
 	UserCollection getUserCollection(int UserId);
-	//void addCardToCollection(UserCollectionId uid);
+
 	
 }

@@ -24,6 +24,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	private CardDAO carddao;
 
 	@Override
+
 	public void addCardToCollection(UserCollectionId uid) {
 	    Optional<User> user = usrdao.findById(uid.getUserId());
 	    Optional<Card> card = carddao.findById(uid.getCardId());
@@ -45,6 +46,29 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	        userCollection.setQuantity(1);
 	        dao.save(userCollection);
 	    }
+/*
+	public void addCardToCollection(UserCollectionId cid) {
+		// TODO Auto-generated method stub
+		Optional<UserCollection> usercollection = dao.findById(cid);
+		if (usercollection.isPresent()) {
+			UserCollection userCollection = usercollection.get();
+			userCollection.setQuantity(userCollection.getQuantity()+1);
+			dao.save(userCollection);
+		}else {
+			User user = usrdao.findById(cid.getUserId()).orElse(null);
+			Card card = carddao.findById(cid.getCardId()).orElse(null);
+			
+			if (user == null || card == null ) {
+				throw new IllegalArgumentException("Utente o carta non trovati");}
+			
+			UserCollection userCollection = new UserCollection();
+			userCollection.setId(cid);
+			userCollection.setUser(user); //setta l'utenete
+			userCollection.setCard(card); //setta la carta
+			userCollection.setQuantity(1); // setta quantità a uno
+			dao.save(userCollection);
+		}
+*/
 	}
 
 	@Override
@@ -73,3 +97,4 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		}
 	}
 }
+
