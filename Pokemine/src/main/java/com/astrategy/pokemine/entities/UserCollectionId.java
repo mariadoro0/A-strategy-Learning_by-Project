@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.Objects;
@@ -18,6 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserCollectionId implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     
     @Column(name = "user_id")
