@@ -2,6 +2,8 @@ package com.astrategy.pokemine.entities;
 
 import java.util.Set;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +29,8 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
+	@OnDelete(action = OnDeleteAction.CASCADE) // per adesso ho messo questo ma non so se sia giusto
+	private int id ;	
 	private String username;
 	private String email;
 	private String password; //dobbiamo fare il getter di password ?
