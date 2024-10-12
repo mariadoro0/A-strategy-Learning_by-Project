@@ -1,20 +1,14 @@
 package com.astrategy.pokemine.controllers;
 
-import com.astrategy.pokemine.entities.Card;
 import com.astrategy.pokemine.entities.Deck;
-import com.astrategy.pokemine.entities.User;
-import com.astrategy.pokemine.services.CardService;
 import com.astrategy.pokemine.services.DeckService;
-import com.astrategy.pokemine.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("pokemon/decks")
@@ -40,8 +34,13 @@ public class DeckController {
 
     @ResponseBody
     @GetMapping("{userId}/{deckId}")
-    public ResponseEntity<Map<String, Integer>> getDeckCards(@PathVariable int userId, @PathVariable int deckId) {
-        return new ResponseEntity<>(deckService.getDeckCardsByDeckId(deckId), HttpStatus.OK);
+    public ResponseEntity<?> getDeckCards(@PathVariable int userId, @PathVariable int deckId) {
+        try {
+            Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(userId, deckId);
+            return new ResponseEntity<>(deckCards, HttpStatus.OK);
+        }catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("{userId}/{deckId}/validate")
