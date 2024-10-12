@@ -1,12 +1,9 @@
 package com.astrategy.pokemine.services;
 
 import com.astrategy.pokemine.entities.Deck;
-import com.astrategy.pokemine.entities.DeckCard;
-import com.astrategy.pokemine.entities.DeckCardId;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface DeckService {
     void createDeck(int userId, String deckName, String deckDescription); // Crea un mazzo con le carte dalla collezione personale

@@ -6,8 +6,16 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserCollectionId implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,20 +25,8 @@ public class UserCollectionId implements Serializable {
     
     @Column(name ="card_id")
     private String cardId;
-    
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public String getCardId() {
-		return cardId;
-	}
-	public void setCardId(String cardId) {
-		this.cardId = cardId;
-	}
-	@Override
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
