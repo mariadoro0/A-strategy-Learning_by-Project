@@ -40,8 +40,13 @@ public class DeckController {
 
     @ResponseBody
     @GetMapping("{userId}/{deckId}")
-    public ResponseEntity<Map<String, Integer>> getDeckCards(@PathVariable int userId, @PathVariable int deckId) {
-        return new ResponseEntity<>(deckService.getDeckCardsByDeckId(deckId), HttpStatus.OK);
+    public ResponseEntity<?> getDeckCards(@PathVariable int userId, @PathVariable int deckId) {
+        try {
+            Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(userId, deckId);
+            return new ResponseEntity<>(deckCards, HttpStatus.OK);
+        }catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("{userId}/{deckId}/validate")
