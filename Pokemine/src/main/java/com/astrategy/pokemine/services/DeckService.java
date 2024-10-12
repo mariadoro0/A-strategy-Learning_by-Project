@@ -14,7 +14,7 @@ public interface DeckService {
     void removeCardFromDeck(int userId, int deckId, String cardId); // Rimuove una carta da un mazzo esistente
     List<Deck> getDecksByUser(int userId); // Ritorna tutti i mazzi creati dall'utente
     boolean validateDeck(int deckId); // Verifica che il mazzo sia conforme al regolamento
-    Map<String,Integer> getDeckCardsByDeckId(int deckId);
+    Map<String,Integer> getDeckCardsByDeckId(int userId,int deckId);
     Deck findDeckById(int deckId);
     void deleteDeck(int deckId);
 }

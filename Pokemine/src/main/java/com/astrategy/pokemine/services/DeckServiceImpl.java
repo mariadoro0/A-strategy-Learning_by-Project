@@ -1,10 +1,7 @@
 package com.astrategy.pokemine.services;
 
 import com.astrategy.pokemine.entities.*;
-import com.astrategy.pokemine.repos.CardDAO;
-import com.astrategy.pokemine.repos.DeckCardDAO;
-import com.astrategy.pokemine.repos.DeckDAO;
-import com.astrategy.pokemine.repos.UserDAO;
+import com.astrategy.pokemine.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,8 @@ public class DeckServiceImpl implements DeckService {
     private DeckCardDAO deckCardDAO;
     @Autowired
     private CardDAO cardDAO;
+    @Autowired
+    private UserCollectionDAO userCollectionDAO;
 
     @Override
     public void createDeck(int userId, String deckName, String deckDescription) {
@@ -47,6 +46,11 @@ public class DeckServiceImpl implements DeckService {
         if(!user.equals(deck.getUser())){
             throw new IllegalArgumentException("Il mazzo non appartiene all'utente selezionato");
         }
+        //Verifica che la carta sia nella collezione dell'utente
+        UserCollection userCollection = userCollectionDAO.findById(new UserCollectionId(userId,cardId))
+                .orElseThrow(() -> new IllegalArgumentException("La carta non è presente nella collezione dell'utente."));
+        int owned = userCollection.getQuantity();
+
         // Verifica se la carta è una Carta Energia Base
         boolean isBasicEnergy = card.getSupertype().equals("Energy") && card.getSubtypes().stream()
                 .anyMatch(subtype -> subtype.getName().equals("Basic"));
@@ -61,6 +65,11 @@ public class DeckServiceImpl implements DeckService {
             // Controlla che la quantità non sia maggiore di 4, solo se non è una Carta Energia Base
             if (!isBasicEnergy && cardToAdd.getQuantity() >= 4) {
                 throw new IllegalArgumentException("Non puoi aggiungere più di 4 copie della stessa carta non-Energia Base.");
+            }
+            // Controlla che la quantità non sia maggiore di quella effettivamente posseduta
+            if(cardToAdd.getQuantity()+1>owned){
+                throw new IllegalArgumentException("Non possiedi abbastanza unità di questa carta nella tua collezione.");
+
             }
 
             cardToAdd.setQuantity(cardToAdd.getQuantity() + 1);
@@ -135,10 +144,14 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
-    public Map<String, Integer> getDeckCardsByDeckId(int deckId) {
+    public Map<String, Integer> getDeckCardsByDeckId(int userId,int deckId) {
+        User user = userDAO.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId + " non trovato."));
         // Trova il mazzo tramite il suo ID
         Deck deck = findDeckById(deckId);
-
+        if (!user.equals(deck.getUser())) {
+            throw new IllegalArgumentException("Il mazzo non appartiene all'utente selezionato");
+        }
         // Ottieni tutte le DeckCard associate a questo Deck
         List<DeckCard> deckCards = deckCardDAO.findByDeck(deck);
 
