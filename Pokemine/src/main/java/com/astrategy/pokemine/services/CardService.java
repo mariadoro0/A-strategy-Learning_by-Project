@@ -14,7 +14,7 @@ public interface CardService {
         List<Card> getCardByRarity(String rarity);
         List<Card> getCardBySupertype(String supertype);
         List<Card> getCardByType_Id(int typeId);
-        Card getCardByName(String name);
+        List<Card> getCardByName(String name);
         List<Card> getAllCards();
         List<Card> getCardByGenerationByArtistBySetNameByRarityBySupertypeByType_Id(String generation, String artist, String set, String rarity, String supertype, Integer typeId, String name);
 
