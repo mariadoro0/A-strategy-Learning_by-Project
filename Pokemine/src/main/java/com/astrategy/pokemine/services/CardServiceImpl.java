@@ -69,8 +69,7 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Card getCardByName(String name) {
-		// TODO Auto-generated method stub
+	public List<Card> getCardByName(String name) {
 		return dao.findByName(name);
 	}
 
