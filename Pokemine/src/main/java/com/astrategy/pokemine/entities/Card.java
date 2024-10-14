@@ -68,7 +68,7 @@ public class Card {
 	
 	private String img;
 
-	@OneToMany(mappedBy = "cards")
+	@OneToMany(mappedBy = "card")
 	private Set<UserCollection> userCollection ;
 
 	/*relationship between a card and its abilities by relational table*/

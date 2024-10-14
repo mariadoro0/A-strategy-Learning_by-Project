@@ -41,7 +41,7 @@ public class User {
 	}
 
 
-	@OneToMany(mappedBy = "users")
+	@OneToMany(mappedBy = "user")
 	private Set<UserCollection> userCollection ;
 
 
