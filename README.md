@@ -24,22 +24,18 @@ Per favorire l'inclusione e l'utilizzo, la proposta è comprensiva della version
 
 ### API Endpoint Table 
 
-| Endpoint  | Method  | Description                         | Parameters                     |
-|-----------|---------|-------------------------------------|--------------------------------|
-|To add a breakline in Markdown, you can use two spaces at the end of a line or insert an HTML `<br>` tag for a more reliable break. Here’s the API Endpoint Table with breaklines using HTML:
 
-```markdown
 ### API Endpoint Table
 
-| Endpoint                  | Method     | Description                           | Parameters                                   |
-|---------------------------|------------|---------------------------------------|----------------------------------------------|
-|`/pokemon/search`          |GET         | Fetch all Cards                       | `None`,`name`,`type`,'artist',`set`,`generation`,`rarity`,`supertype` |
-|`/pokemon/add`             |POST        | Add new user                          | `username`,`email`,`password`                |
-|`/pokemon/delete`          |GET         | remove user with id                   | `id`                                         |
-|`/pokemon/collection/`     |GET         | Fetch all Cards of collection         | `id`                                         |
-|`/pokemon/collection/add`  |POST        | Add new Card to collection            | `userid`, `cardid`                           |
-|'/pokemon/collection/remove'|Post       | remove Card From collection           | `userid`,`cardid`                            |
-|`/pokemon/decks/`          |GET         | Fetch Deck by User id                 | `userid`                                     |
-|`/pokemon/{userid}/newdeck`|POST        | Add new Deck to user                  | `deckname`, `description`                    |
-|`/pokemon/{userid}/{deckid}`|GET        | Fecth User with speci. Deck Id        |`None`                                        |
+| Endpoint                   | Method      | Description                           | Parameters                                   |
+|----------------------------|-------------|---------------------------------------|----------------------------------------------|
+| `/pokemon/search`          | GET         | Fetch all Cards                       | `None`,`name`,`type`,'artist',`set`,`generation`,`rarity`,`supertype` |
+| `/pokemon/add`             | POST        | Add new user                          | `username`,`email`,`password`                |
+| `/pokemon/delete`          | GET         | remove user with id                   | `id`                                         |
+| `/pokemon/collection/`     | GET         | Fetch all Cards of collection         | `id`                                         |
+| `/pokemon/collection/add`  | POST        | Add new Card to collection            | `userid`, `cardid`                           |
+| '/pokemon/collection/remove'| Post       | remove Card From collection           | `userid`,`cardid`                            |
+| `/pokemon/decks/`          | GET         | Fetch Deck by User id                 | `userid`                                     |
+| `/pokemon/{userid}/newdeck`| POST        | Add new Deck to user                  | `deckname`, `description`                    |
+| `/pokemon/{userid}/{deckid}`| GET        | Fecth User with speci. Deck Id        |`None`                                        |
 
