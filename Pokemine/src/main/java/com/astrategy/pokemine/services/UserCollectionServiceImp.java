@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,12 @@ public class UserCollectionServiceImp implements UserCollectionService {
 
 	@Override
 
-	public void addCardToCollection(UserCollectionId uid) {
-	    Optional<User> user = usrdao.findById(uid.getUserId());
-	    Optional<Card> card = carddao.findById(uid.getCardId());
-
-	    if (user.isEmpty() || card.isEmpty()) {
-	        throw new IllegalArgumentException("Utente o carta non trovati");
-	    }
+	public void addCardToCollection(int userId, String cardId) {
+	    User user = usrdao.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+	    Card card = carddao.findById(cardId)
+				.orElseThrow(() -> new IllegalArgumentException("Carta con id: " + cardId+" non trovata."));
+		UserCollectionId uid = new UserCollectionId(userId, cardId);
 
 	    Optional<UserCollection> usercollection = dao.findById(uid);
 	    if (usercollection.isPresent()) {
@@ -41,38 +41,20 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	    } else {
 	        UserCollection userCollection = new UserCollection();
 	        userCollection.setId(uid);
-	        userCollection.setUser(user.get());
-	        userCollection.setCard(card.get()); 
+	        userCollection.setUser(user);
+	        userCollection.setCard(card);
 	        userCollection.setQuantity(1);
 	        dao.save(userCollection);
 	    }
-/*
-	public void addCardToCollection(UserCollectionId cid) {
-		// TODO Auto-generated method stub
-		Optional<UserCollection> usercollection = dao.findById(cid);
-		if (usercollection.isPresent()) {
-			UserCollection userCollection = usercollection.get();
-			userCollection.setQuantity(userCollection.getQuantity()+1);
-			dao.save(userCollection);
-		}else {
-			User user = usrdao.findById(cid.getUserId()).orElse(null);
-			Card card = carddao.findById(cid.getCardId()).orElse(null);
-			
-			if (user == null || card == null ) {
-				throw new IllegalArgumentException("Utente o carta non trovati");}
-			
-			UserCollection userCollection = new UserCollection();
-			userCollection.setId(cid);
-			userCollection.setUser(user); //setta l'utenete
-			userCollection.setCard(card); //setta la carta
-			userCollection.setQuantity(1); // setta quantità a uno
-			dao.save(userCollection);
-		}
-*/
 	}
 
 	@Override
-	public void removeCardToCollection(UserCollectionId cid) {
+	public void removeCardToCollection(int userId, String cardId) {
+		User user = usrdao.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+		Card card = carddao.findById(cardId)
+				.orElseThrow(() -> new IllegalArgumentException("Carta con id: " + cardId+" non trovata."));
+		UserCollectionId cid = new UserCollectionId(userId, cardId);
 		Optional<UserCollection> OuserCollection = dao.findById(cid);
 		if (OuserCollection.isPresent()) {
 			UserCollection userCollection = OuserCollection.get();
@@ -88,13 +70,10 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	}
 
 	@Override
-	public UserCollection getUserCollection(int userId) {
-		Optional<User> user = usrdao.findById(userId);
-		if (user.isPresent()) {
-			return dao.findByUserId(user);
-		} else {
-			throw new RuntimeException("Utente non trovato");
-		}
+	public List<UserCollection> getUserCollection(int userId) {
+		User user = usrdao.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+			return dao.findByUser(user);
 	}
 }
 

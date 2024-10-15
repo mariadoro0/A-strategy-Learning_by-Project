@@ -40,7 +40,7 @@ public class DeckServiceImpl implements DeckService {
         User user = userDAO.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
         Card card = cardDAO.findById(cardId)
-                .orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+                .orElseThrow(() -> new IllegalArgumentException("Carta con id: " + cardId+" non trovata."));
         Deck deck = deckDAO.findById(deckId)
                 .orElseThrow(() -> new IllegalArgumentException("Mazzo con id: " + deckId+" non trovato."));
         //Verifica che l'utente sia il proprietario del mazzo
@@ -109,7 +109,7 @@ public class DeckServiceImpl implements DeckService {
                 deckCardDAO.save(cardToAdd);
             }
         } else {
-            throw new IllegalArgumentException("Mazzo con id: " + cardId+" non trovato.");
+            throw new IllegalArgumentException("Carta non presente nel mazzo.");
         }
     }
 
@@ -134,7 +134,7 @@ public class DeckServiceImpl implements DeckService {
         if (!checkBaseCard(deck)) {
         	errors.add("Card of type Pokemon Basic not found.");
         }
-        if(errors.isEmpty()){
+        if(!errors.isEmpty()){
             throw new IllegalArgumentException(String.join("\n", errors));
         } else {
             return "Deck is valid and ready to play!";

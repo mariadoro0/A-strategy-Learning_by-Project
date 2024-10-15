@@ -26,7 +26,6 @@ public class User {
 	private int id ;	
 	private String username;
 	private String email;
-	@JsonIgnore
 	private String password;
 	
 	public User(String username, String email, String password) {
@@ -36,8 +35,7 @@ public class User {
 	}
 
 
-	@OneToMany(mappedBy = "user", orphanRemoval = true)  
-    @OnDelete(action = OnDeleteAction.CASCADE)           
+	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,orphanRemoval = true)
     private Set<UserCollection> userCollection;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
