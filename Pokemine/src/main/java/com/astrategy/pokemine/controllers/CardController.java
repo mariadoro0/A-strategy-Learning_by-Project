@@ -15,49 +15,19 @@ public class CardController {
 	@Autowired
 	private CardService service;
 	@GetMapping("search")
-	public ResponseEntity<List<Card>> getCard() {
-		return new ResponseEntity<List<Card>>(service.getAllCards(),HttpStatus.OK);
-	}
-		
-	@GetMapping("search/id={id}")
-	public ResponseEntity<Card> getCardById(@PathVariable String id) {
-		return new ResponseEntity<Card>(service.getCardById(id),HttpStatus.OK);
-	}	
-	@GetMapping("search/SetName={set}")
-	public ResponseEntity<List<Card>> getCardBySetName(@PathVariable String set) {
-		return new ResponseEntity<List<Card>>(service.getCardBySetName(set),HttpStatus.OK);
-	}	
-	@GetMapping("search/type={typeId}")
-	public ResponseEntity<List<Card>> getCardByType_Id(@PathVariable int typeId) {
-		return new ResponseEntity<List<Card>>(service.getCardByType_Id(typeId),HttpStatus.OK);
-	}	
-	@GetMapping("search/generation={generation}")
-	public ResponseEntity<List<Card>> getCardByGeneration(@PathVariable String generation) {
-		return new ResponseEntity<List<Card>>(service.getCardByGeneration(generation),HttpStatus.OK);
-	}	
-	@GetMapping("search/artist={artist}")
-	public ResponseEntity<List<Card>> getCardByArtist(@PathVariable String artist) {
-		return new ResponseEntity<List<Card>>(service.getCardByArtist(artist),HttpStatus.OK);
-	}	
-	@GetMapping("search/rarity={rarity}")
-	public ResponseEntity<List<Card>> getCardByRarity(@PathVariable String rarity) {
-		return new ResponseEntity<List<Card>>(service.getCardByRarity(rarity),HttpStatus.OK);
-	}	
-	@GetMapping("search/supertype={supertype}")
-	public ResponseEntity<List<Card>> getCardBySupertype(@PathVariable String supertype) {
-		return new ResponseEntity<List<Card>>(service.getCardBySupertype(supertype),HttpStatus.OK);
-	}	
-	@GetMapping("multisearch")
 	public ResponseEntity<List<Card>> getCardByFilters(
-			@RequestParam(required = false) String generation, 
-			@RequestParam(required = false) String artist, 
-			@RequestParam(required = false) String set, 
-			@RequestParam(required = false) String rarity, 
-			@RequestParam(required = false) String supertype, 
+			@RequestParam(required = false) String id,
 			@RequestParam(required = false) String name,
-			@RequestParam(required = false) Integer typeId) {
+			@RequestParam(required = false) String artist,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String set,
+			@RequestParam(required = false) String generation,
+			@RequestParam(required = false) String rarity, 
+			@RequestParam(required = false) String supertype,
+			@RequestParam int page
+			) {
 	      
-		return new ResponseEntity<List<Card>>(service.getCardByGenerationByArtistBySetNameByRarityBySupertypeByType_Id(generation, artist, set, rarity, supertype, typeId, name),HttpStatus.OK);
+		return new ResponseEntity<List<Card>>(service.getByFilters(id,name, artist, type, set, generation, rarity, supertype, page),HttpStatus.OK);
 	}	
 	
 		
