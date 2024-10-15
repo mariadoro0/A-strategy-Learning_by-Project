@@ -20,6 +20,7 @@ import jakarta.persistence.*;
 public class UserCollection {
 
 	@EmbeddedId
+	@JsonIgnore
 	private UserCollectionId id;
 	
 	@ManyToOne

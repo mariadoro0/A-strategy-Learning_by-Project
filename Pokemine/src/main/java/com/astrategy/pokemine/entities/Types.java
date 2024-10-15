@@ -1,6 +1,7 @@
 package com.astrategy.pokemine.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class Types {
 	private Integer id;
 	private String name;
 	@ManyToMany(mappedBy="types")
+	@JsonBackReference
 	private Set<Card> cards;
 	
 

@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -20,6 +21,7 @@ public class Subtypes {
 	private String name;
 
 	@ManyToMany(mappedBy = "subtypes")
+	@JsonBackReference
 	private Set<Card> cards;
 
 }

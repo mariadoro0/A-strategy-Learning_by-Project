@@ -2,6 +2,7 @@ package com.astrategy.pokemine.entities;
 
 
 
+ import com.fasterxml.jackson.annotation.JsonManagedReference;
  import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,6 +70,7 @@ public class Card {
 	private String img;
 
 	@OneToMany(mappedBy = "card")
+	@JsonManagedReference
 	private Set<UserCollection> userCollection ;
 
 	/*relationship between a card and its abilities by relational table*/
@@ -78,6 +80,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "ability_id")
 	)
+	@JsonManagedReference
 	private Set<Abilities> abilities;
 
 	/*relationship between a card and its attacks by relational table*/
@@ -87,6 +90,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "attack_id")
 	)
+	@JsonManagedReference
 	private Set<Attacks> attacks;
 
 	/*relationship between a card and its weaknesses by relational table*/
@@ -96,6 +100,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "weakness_id")
 	)
+	@JsonManagedReference
 	private Set<Weaknesses> weaknesses;
 
 	/*relationship between a card and its abilities by relational table*/
@@ -105,6 +110,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "resistance_id")
 	)
+	@JsonManagedReference
 	private Set<Resistances> resistances;
 
 	/*relationship between a card and its types by relational table*/
@@ -114,6 +120,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "type_id")
 	)
+	@JsonManagedReference
 	private Set<Types> types;
 
 	/*relationship between a card and its subtypes by relational table*/
@@ -123,6 +130,7 @@ public class Card {
 			joinColumns = @JoinColumn(name = "card_id"),
 			inverseJoinColumns = @JoinColumn(name = "subtype_id")
 	)
+	@JsonManagedReference
 	private Set<Subtypes> subtypes;
 
 }
