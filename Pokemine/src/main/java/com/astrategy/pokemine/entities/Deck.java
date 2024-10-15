@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Deck {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 	
 	private String deckName;
@@ -27,6 +29,7 @@ public class Deck {
 	private String deckDescription;
 
 	@OneToMany(mappedBy = "deck")
+	@JsonIgnore
 	private Set<DeckCard> deckCards;
 
 	public Deck(User userId, String deckName, String deckDescription) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CardServiceImpl {
+public class CardServiceImpl implements CardService {
 
     private static final int page_size = 100;
 
@@ -54,9 +54,9 @@ public class CardServiceImpl {
             if (rarity != null) {
                 predicates.add(cb.equal(cb.lower(root.get("rarity")), rarity.toLowerCase()));
             }
-
             return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
         };
+
 
         Pageable pageable = PageRequest.of(page - 1, page_size);
         return dao.findAll(spec, pageable).getContent();

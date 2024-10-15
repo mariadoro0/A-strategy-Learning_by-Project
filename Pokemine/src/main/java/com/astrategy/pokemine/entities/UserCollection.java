@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -24,14 +26,13 @@ public class UserCollection {
 	@MapsId("cardId")
 	@JoinColumn(name="card_id")
 	@JsonIgnore
-	private Card card ;
+	private Card card;
 	
 	@ManyToOne
 	@MapsId("userId")
 	@JoinColumn(name="user_id")
 	@JsonIgnore
 	private User user;
-
 
 	@Column(name ="quantity")
 	private int quantity ;

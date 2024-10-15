@@ -2,6 +2,8 @@ package com.astrategy.pokemine.entities;
 
 import java.util.Set;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,8 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
-
 @Getter
 @Setter
 @Entity
@@ -27,22 +27,20 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
+	private int id ;	
 	private String username;
 	private String email;
-	private String password; //dobbiamo fare il getter di password ?
+	@JsonIgnore
+	private String password;
 	
 	public User(String username, String email, String password) {
 		this.username = username;
-		this.email = email;     //Ma PPPPPPERCHE IL COSTRUTTORE ?
+		this.email = email;
 		this.password = password;
 	}
 
 
-	@OneToMany(mappedBy = "users")
-	private Set<UserCollection> usersCollection ;
-
-
-
-
+	@OneToMany(mappedBy = "user", orphanRemoval = true)  
+    @OnDelete(action = OnDeleteAction.CASCADE)           
+    private Set<UserCollection> userCollection;
 }

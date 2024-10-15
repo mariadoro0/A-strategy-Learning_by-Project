@@ -22,8 +22,32 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	private UserDAO usrdao;
 	@Autowired 
 	private CardDAO carddao;
+
 	@Override
-	public void addCardToColletion(UserCollectionId cid) {
+
+	public void addCardToCollection(UserCollectionId uid) {
+	    Optional<User> user = usrdao.findById(uid.getUserId());
+	    Optional<Card> card = carddao.findById(uid.getCardId());
+
+	    if (user.isEmpty() || card.isEmpty()) {
+	        throw new IllegalArgumentException("Utente o carta non trovati");
+	    }
+
+	    Optional<UserCollection> usercollection = dao.findById(uid);
+	    if (usercollection.isPresent()) {
+	        UserCollection userCollection = usercollection.get();
+	        userCollection.setQuantity(userCollection.getQuantity() + 1);
+	        dao.save(userCollection);
+	    } else {
+	        UserCollection userCollection = new UserCollection();
+	        userCollection.setId(uid);
+	        userCollection.setUser(user.get());
+	        userCollection.setCard(card.get()); 
+	        userCollection.setQuantity(1);
+	        dao.save(userCollection);
+	    }
+/*
+	public void addCardToCollection(UserCollectionId cid) {
 		// TODO Auto-generated method stub
 		Optional<UserCollection> usercollection = dao.findById(cid);
 		if (usercollection.isPresent()) {
@@ -44,35 +68,33 @@ public class UserCollectionServiceImp implements UserCollectionService {
 			userCollection.setQuantity(1); // setta quantità a uno
 			dao.save(userCollection);
 		}
+*/
 	}
 
 	@Override
-	public void removeCardToColletion(UserCollectionId cid) {
+	public void removeCardToCollection(UserCollectionId cid) {
 		Optional<UserCollection> OuserCollection = dao.findById(cid);
-		if(OuserCollection.isPresent()) {
+		if (OuserCollection.isPresent()) {
 			UserCollection userCollection = OuserCollection.get();
-			if(userCollection.getQuantity()> 1) {
-				userCollection.setQuantity(userCollection.getQuantity()-1);
+			if (userCollection.getQuantity() > 1) {
+				userCollection.setQuantity(userCollection.getQuantity() - 1);
 				dao.save(userCollection);
-			}else {
+			} else {
 				dao.delete(userCollection);
 			}
-		}else {
+		} else {
 			throw new RuntimeException("La carta non esiste nella collezione.");
 		}
-		
 	}
 
 	@Override
-	public UserCollection getUserCollection(int UserId) {
-		// TODO Auto-generated method stub
-		return dao.findByUserId(usrdao.findById(UserId));
+	public UserCollection getUserCollection(int userId) {
+		Optional<User> user = usrdao.findById(userId);
+		if (user.isPresent()) {
+			return dao.findByUserId(user);
+		} else {
+			throw new RuntimeException("Utente non trovato");
+		}
 	}
-
-	@Override
-	public void addCardToCollection(UserCollectionId uid) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
+
