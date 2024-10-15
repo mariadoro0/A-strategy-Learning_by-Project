@@ -5,6 +5,7 @@ import com.astrategy.pokemine.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,18 +124,21 @@ public class DeckServiceImpl implements DeckService {
         //if there are 60 cards and at least one Basic Pokémon, it is valid
         // so it comes back true
         //deck.size();
-        
-        if (deckCount(deck) > 0 && deckCount(deck)<60 && checkBaseCard(deck) == true) {
-        	return "Deck is valid but  Incomplete";
+        List<String> errors = new ArrayList<>();
+        if(deck == null){
+            throw new IllegalArgumentException("Deck not found.");
         }
-        if (checkBaseCard(deck) != true) {
-        	return "Deck in not valid, not present Card of type Pokemon Basic";
+        if (deckCount(deck)<60) {
+        	errors.add("You don't have enough cards.");
         }
-        if (checkBaseCard(deck) == true && deckCount(deck) == 60){
-        	return "Deck is valid and ready to play" ;
+        if (!checkBaseCard(deck)) {
+        	errors.add("Card of type Pokemon Basic not found.");
         }
-        if(deck == null)
-        	return "Deck no found";
+        if(errors.isEmpty()){
+            throw new IllegalArgumentException(String.join("\n", errors));
+        } else {
+            return "Deck is valid and ready to play!";
+        }
 
     }
     // this method checks the number of cards in the deck: to be valid it must be 60
