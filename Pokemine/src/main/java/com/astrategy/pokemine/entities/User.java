@@ -27,7 +27,6 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OnDelete(action = OnDeleteAction.CASCADE) // per adesso ho messo questo ma non so se sia giusto
 	private int id ;	
 	private String username;
 	private String email;
@@ -40,11 +39,8 @@ public class User {
 		this.password = password;
 	}
 
-
-	@OneToMany(mappedBy = "users")
-	private Set<UserCollection> userCollection ;
-
-
-
-
+	@OneToMany(mappedBy = "user", orphanRemoval = true)  
+    @OnDelete(action = OnDeleteAction.CASCADE)           
+    private Set<UserCollection> userCollection;
+	
 }
