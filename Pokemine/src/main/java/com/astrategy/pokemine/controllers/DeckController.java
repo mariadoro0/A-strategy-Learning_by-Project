@@ -45,11 +45,14 @@ public class DeckController {
 
     @GetMapping("{userId}/{deckId}/validate")
     public ResponseEntity<String> validateDeck(@PathVariable int userId, @PathVariable int deckId) {
-        if(deckService.validateDeck(deckId)) {
-            return new ResponseEntity<>("Il mazzo è valido.", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Il mazzo non è valido.",HttpStatus.OK);
-        }
+    	
+    	String valid = deckService.validateDeck(deckId);
+    	if(valid.contains("not valid") || valid.contains("Incomplete") || valid.contains("not found")) {
+    		return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(valid);
+    	}else {
+    		return ResponseEntity.ok(valid);
+    	}
+       
     }
 
     @PostMapping("{userId}/{deckId}/add")

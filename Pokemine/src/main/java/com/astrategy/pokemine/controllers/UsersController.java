@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.astrategy.pokemine.entities.User;
@@ -31,15 +32,15 @@ public class UsersController {
     }
 	
 	
-	//da provare non so se ho fatto giusto
+	
 	@GetMapping("delete")
-	public ResponseEntity<String> delete(@RequestBody int id){
-		try {
-            userService.deleteById(id);
-            return new ResponseEntity<>("User deleted successfully", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error id not present: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+	public ResponseEntity<String> delete(@RequestParam int id) {
+	    try {
+	        userService.deleteById(id);
+	        return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("Error: ID not present - " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
 	}
 		
 }
