@@ -20,6 +20,7 @@ public interface UserCollectionDAO extends JpaRepository<UserCollection, UserCol
 
     // Trova tutte le carte possedute dall'utente (attraverso la collezione)
     List<Card> findCarteByUserId(int userId);
-   
 
+
+    List<UserCollection> findByUser(User user);
 }

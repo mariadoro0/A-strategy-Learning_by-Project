@@ -45,8 +45,7 @@ public class UsersServiceImpl implements UserService{
 	// Method to retrieve a user by their ID
 	@Override
 	public Optional<User> getUserById(int userId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return dao.findById(userId);
 	}
 	
 	// Method to update user details
