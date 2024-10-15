@@ -3,75 +3,62 @@ package com.astrategy.pokemine.services;
 import com.astrategy.pokemine.entities.Card;
 import com.astrategy.pokemine.repos.CardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 @Service
 public class CardServiceImpl implements CardService {
+
+    private static final int page_size = 100;
+
     @Autowired
     private CardDAO dao;
 
-    @Override
-    public Card getCardById(String id) {
-        return dao.findById(id).orElseThrow(()-> new IllegalArgumentException("Card not found"));
+    public List<Card> getByFilters(String Id, String name, String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
+        Specification<Card> spec = (root, query, cb) -> {
+            List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
+
+            if (Id != null) {
+                predicates.add(cb.equal(root.get("id"), Id));
+            }
+
+            if (name != null) {
+                predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+
+            if (supertype != null) {
+                predicates.add(cb.equal(cb.lower(root.join("supertype").get("name")), supertype.toLowerCase()));
+            }
+
+            if (type != null) {
+                predicates.add(cb.equal(cb.lower(root.join("types").get("name")), type.toLowerCase()));
+            }
+
+            if (artist != null) {
+                predicates.add(cb.like(cb.lower(root.get("artist")), "%" + artist.toLowerCase() + "%"));
+            }
+
+            if (setName != null) {
+                predicates.add(cb.equal(cb.lower(root.get("setName")), setName.toLowerCase()));
+            }
+
+            if (generation != null) {
+                predicates.add(cb.equal(cb.lower(root.get("generation")), generation.toLowerCase()));
+            }
+
+            if (rarity != null) {
+                predicates.add(cb.equal(cb.lower(root.get("rarity")), rarity.toLowerCase()));
+            }
+            return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
+
+
+        Pageable pageable = PageRequest.of(page - 1, page_size);
+        return dao.findAll(spec, pageable).getContent();
     }
-
-    @Override
-    public List<Card> getCardByGeneration(String generation) {
-        return dao.findByGeneration(generation);
-    }
-
-    @Override
-    public List<Card> getCardByArtist(String artist) {
-        return dao.findByArtist(artist);
-    }
-
-    @Override
-    public List<Card> getCardBySetName(String set) {
-        return dao.findBySetName(set);
-    }
-
-    @Override
-    public List<Card> getCardByRarity(String rarity) {
-        return dao.findByRarity(rarity);
-    }
-
-    @Override
-    public List<Card> getCardBySupertype(String supertype) {
-        return dao.findBySupertype(supertype);
-    }
-
-    @Override
-    public List<Card> getCardByType_Id(int typeId) {
-        return dao.findByTypes_Id(typeId);
-    }
-
-    @Override
-    public List<Card> getCardByGenerationByArtistBySetNameByRarityBySupertypeByType_Id(String generation, String artist, String set, String rarity, String supertype, Integer typeId, String name) {
-        return dao.findAll().stream()
-                .filter(card -> generation == null || generation.isEmpty() || card.getGeneration().equals(generation))
-                .filter(card -> artist == null || artist.isEmpty() || card.getArtist().equals(artist))
-                .filter(card -> set == null || set.isEmpty() || card.getSetName().equals(set))
-                .filter(card -> rarity == null || rarity.isEmpty() || card.getRarity().equals(rarity))
-                .filter(card -> supertype == null || supertype.isEmpty() || card.getSupertype().equals(supertype))
-                .filter(card -> typeId == null || card.getTypes().stream().anyMatch(type -> type.getId().equals(typeId)))
-                .filter(card -> name == null || name.isEmpty()||card.getName().equals(name))
-                .collect(Collectors.toList());
-    }
-
-	public List<Card> getAllCards() {
-		// TODO Auto-generated method stub
-		return dao.findAll();
-	}
-
-	@Override
-	public List<Card> getCardByName(String name) {
-		return dao.findByName(name);
-	}
-
-	
 }
