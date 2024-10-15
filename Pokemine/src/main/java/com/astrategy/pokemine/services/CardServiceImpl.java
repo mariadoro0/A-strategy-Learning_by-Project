@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -60,5 +61,17 @@ public class CardServiceImpl implements CardService {
 
         Pageable pageable = PageRequest.of(page - 1, page_size);
         return dao.findAll(spec, pageable).getContent();
+    }
+
+
+
+    @Override
+    public Optional<Card> getCardById(String id) {
+        return dao.findById(id);
+    }
+
+    @Override
+    public List<Card> getAllCards() {
+        return dao.findAll();
     }
 }
