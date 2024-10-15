@@ -28,7 +28,7 @@ public class Deck {
 	
 	private String deckDescription;
 
-	@OneToMany(mappedBy = "deck")
+	@OneToMany(mappedBy = "deck", orphanRemoval = true)
 	@JsonIgnore
 	private Set<DeckCard> deckCards;
 

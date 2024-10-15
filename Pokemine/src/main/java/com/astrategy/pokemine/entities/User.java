@@ -1,19 +1,15 @@
 package com.astrategy.pokemine.entities;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,4 +39,8 @@ public class User {
 	@OneToMany(mappedBy = "user", orphanRemoval = true)  
     @OnDelete(action = OnDeleteAction.CASCADE)           
     private Set<UserCollection> userCollection;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	private Set<Deck> decks = new LinkedHashSet<>();
 }
