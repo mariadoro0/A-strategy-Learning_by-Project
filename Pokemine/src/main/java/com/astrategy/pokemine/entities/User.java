@@ -39,8 +39,8 @@ public class User {
 		this.password = password;
 	}
 
+
 	@OneToMany(mappedBy = "user", orphanRemoval = true)  
     @OnDelete(action = OnDeleteAction.CASCADE)           
     private Set<UserCollection> userCollection;
-	
 }
