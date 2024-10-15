@@ -118,20 +118,31 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
-    public boolean validateDeck(int deckId) {
+    public String validateDeck(int deckId) {
         Deck deck = findDeckById(deckId);
         //if there are 60 cards and at least one Basic Pokémon, it is valid
         // so it comes back true
-        return deckCount(deck) && checkBaseCard(deck);
+        //deck.size();
+        
+        if (deckCount(deck) > 0 && deckCount(deck)<60 && checkBaseCard(deck) == true) {
+        	return "Deck is valid but  Incomplete";
+        }
+        if (checkBaseCard(deck) != true) {
+        	return "Deck in not valid, not present Card of type Pokemon Basic";
+        }
+        if (checkBaseCard(deck) == true && deckCount(deck) == 60){
+        	return "Deck is valid and ready to play" ;
+        }
+        if(deck == null)
+        	return "Deck no found";
 
     }
-
     // this method checks the number of cards in the deck: to be valid it must be 60
-    public boolean deckCount(Deck deck){
+    public int deckCount(Deck deck){
         int sum = deck.getDeckCards().stream()
                 .mapToInt(DeckCard::getQuantity)
                 .sum();
-        return sum == 60;
+        return sum;
     }
 
     // this method checks if there is at least one Basic Pokémon in the deck

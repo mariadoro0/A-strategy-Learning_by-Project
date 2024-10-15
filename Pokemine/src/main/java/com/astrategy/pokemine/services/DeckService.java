@@ -10,7 +10,7 @@ public interface DeckService {
     void addCardToDeck(int userId, int deckId, String cardId); // Aggiunge una carta a un mazzo esistente
     void removeCardFromDeck(int userId, int deckId, String cardId); // Rimuove una carta da un mazzo esistente
     List<Deck> getDecksByUser(int userId); // Ritorna tutti i mazzi creati dall'utente
-    boolean validateDeck(int deckId); // Verifica che il mazzo sia conforme al regolamento
+    String validateDeck(int deckId); // Verifica che il mazzo sia conforme al regolamento
     Map<String,Integer> getDeckCardsByDeckId(int userId,int deckId);
     Deck findDeckById(int deckId);
     void deleteDeck(int deckId);
