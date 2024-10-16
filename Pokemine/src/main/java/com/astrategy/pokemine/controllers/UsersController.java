@@ -14,14 +14,14 @@ import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.services.UserService;
 
 @RestController
-@RequestMapping("pokemon")
+@RequestMapping("users")
 public class UsersController {
 	 
 	@Autowired
 	private UserService userService;
 
 	
-	@PostMapping("add")
+	@PostMapping("signin")
     public ResponseEntity<String> add(@RequestBody User user) {
         try {
             userService.addUser(user);
@@ -33,7 +33,7 @@ public class UsersController {
 	
 	
 	
-	@GetMapping("delete")
+	@GetMapping("deleteaccount")
 	public ResponseEntity<String> delete(@RequestParam int id) {
 	    try {
 	        userService.deleteById(id);

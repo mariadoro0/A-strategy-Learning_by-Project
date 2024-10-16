@@ -1,23 +1,19 @@
 package com.astrategy.pokemine.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.astrategy.pokemine.entities.Card;
-import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.entities.UserCollection;
-import com.astrategy.pokemine.entities.UserCollectionId;
-import com.astrategy.pokemine.services.CardService;
-import com.astrategy.pokemine.services.UserCollectionService; // DA FARE
-import com.astrategy.pokemine.services.UserService; // DA FARE
+import com.astrategy.pokemine.services.UserCollectionService;
+
+
 
 @RestController
-@RequestMapping("pokemon/collection")
+@RequestMapping("collection")
 public class UserCollectionController {
     @Autowired
     private UserCollectionService service;
@@ -32,8 +28,8 @@ public class UserCollectionController {
 	    return new ResponseEntity<>(collection, HttpStatus.OK); // Restituisce 200 con la collezione
 	}
 
-	@PostMapping("add")
-	public ResponseEntity<String> addCard(@RequestParam int userId, @RequestParam String cardId) {
+	@PostMapping("{userId}/add")
+	public ResponseEntity<String> addCard(@PathVariable int userId, @RequestParam String cardId) {
 		 try {
 			 service.addCardToCollection(userId,cardId);
 			 return ResponseEntity.ok("Carta aggiunta alla collezione");
@@ -42,8 +38,8 @@ public class UserCollectionController {
 		 }
 	}
 
-	 @PostMapping("remove")
-	public ResponseEntity<String> removeCard(@RequestParam int userId, @RequestParam String cardId) {
+	 @PostMapping("{userId}/remove")
+	public ResponseEntity<String> removeCard(@PathVariable int userId, @RequestParam String cardId) {
 		 try {
 			 service.removeCardToCollection(userId,cardId);
 			 return ResponseEntity.ok("Carta rimossa dalla collezione");

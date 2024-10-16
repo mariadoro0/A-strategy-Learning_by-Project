@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("pokemon/decks")
+@RequestMapping("decks")
 public class DeckController {
     @Autowired
     private DeckService deckService;
