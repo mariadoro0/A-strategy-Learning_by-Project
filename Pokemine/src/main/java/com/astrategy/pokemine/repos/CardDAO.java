@@ -11,13 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CardDAO extends JpaRepository<Card, String>, JpaSpecificationExecutor<Card> {
     Optional<Card> findById(String Id);
-    List<Card> findByGeneration(String generation);
-    List<Card> findByArtist(String artist);
-    List<Card> findBySetName(String set);
-    List<Card> findByRarity(String rarity);
-    List<Card> findBySupertype(String supertype);
-    List<Card> findByTypes_Id(int typeId);
-    List<Card> findByName(String name);
 
 
 }
