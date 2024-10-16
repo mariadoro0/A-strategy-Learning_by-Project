@@ -1,9 +1,13 @@
 package com.astrategy.pokemine.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+<<<<<<< HEAD
+ import com.fasterxml.jackson.annotation.JsonManagedReference;
+=======
+ import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> 8e52908 (modificato roba blalblala)
+ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
