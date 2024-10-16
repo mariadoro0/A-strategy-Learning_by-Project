@@ -32,11 +32,10 @@ public class CardServiceImpl implements CardService {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
             }
             if (series != null) {
-                predicates.add(cb.like(cb.lower(root.get("series")), "%" + series.toLowerCase() + "%"));
+                predicates.add(cb.like(cb.lower(root.get("series")),"%" + series.toLowerCase() + "%" ));
             }
-
             if (supertype != null) {
-                predicates.add(cb.equal(cb.lower(root.join("supertype").get("name")), supertype.toLowerCase()));
+                predicates.add(cb.like(cb.lower(root.get("supertype")),"%" + supertype.toLowerCase() + "%" ));
             }
 
             if (type != null) {
