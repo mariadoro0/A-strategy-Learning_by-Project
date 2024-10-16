@@ -20,7 +20,7 @@ public class CardServiceImpl implements CardService {
     @Autowired
     private CardDAO dao;
 
-    public List<Card> getByFilters(String Id, String name, String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
+    public List<Card> getByFilters(String Id, String name, String series,String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
         Specification<Card> spec = (root, query, cb) -> {
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
 
@@ -30,6 +30,9 @@ public class CardServiceImpl implements CardService {
 
             if (name != null) {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (series != null) {
+                predicates.add(cb.like(cb.lower(root.get("series")), "%" + series.toLowerCase() + "%"));
             }
 
             if (supertype != null) {
