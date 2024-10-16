@@ -38,6 +38,12 @@ public class User {
 	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,orphanRemoval = true)
     private Set<UserCollection> userCollection;
 
+//	@OneToMany(mappedBy = "user")
+	private Set<UserCollection> userCollection ;
+
+
+
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<Deck> decks = new LinkedHashSet<>();

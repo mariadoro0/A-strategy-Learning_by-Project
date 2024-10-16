@@ -1,9 +1,9 @@
 package com.astrategy.pokemine.entities;
 
 
-
- import com.fasterxml.jackson.annotation.JsonManagedReference;
- import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -70,11 +70,15 @@ public class Card {
 	private String img;
 
 	@OneToMany(mappedBy = "card")
+<<<<<<< HEAD
 	@JsonManagedReference
+=======
+	@JsonIgnore
+>>>>>>> 8e52908 (modificato roba blalblala)
 	private Set<UserCollection> userCollection ;
 
 	/*relationship between a card and its abilities by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_abilities",
 			joinColumns = @JoinColumn(name = "card_id"),
@@ -84,7 +88,7 @@ public class Card {
 	private Set<Abilities> abilities;
 
 	/*relationship between a card and its attacks by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_attacks",
 			joinColumns = @JoinColumn(name = "card_id"),
@@ -94,7 +98,7 @@ public class Card {
 	private Set<Attacks> attacks;
 
 	/*relationship between a card and its weaknesses by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_weaknesses",
 			joinColumns = @JoinColumn(name = "card_id"),
@@ -104,7 +108,7 @@ public class Card {
 	private Set<Weaknesses> weaknesses;
 
 	/*relationship between a card and its abilities by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_resistances",
 			joinColumns = @JoinColumn(name = "card_id"),
@@ -114,7 +118,7 @@ public class Card {
 	private Set<Resistances> resistances;
 
 	/*relationship between a card and its types by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_types",
 			joinColumns = @JoinColumn(name = "card_id"),
@@ -124,7 +128,7 @@ public class Card {
 	private Set<Types> types;
 
 	/*relationship between a card and its subtypes by relational table*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "card_subtypes",
 			joinColumns = @JoinColumn(name = "card_id"),
