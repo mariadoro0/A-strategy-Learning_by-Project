@@ -1,6 +1,6 @@
 
 ### API TEST  Table 
-
+#### some examples of API calls
 | Endpoint                                         | Method   | Description                                | Parameters                                   | request body |
 |--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|---------|
 | `localhost:8080/cards/`                           | GET      | Fetch all Cards                            | `name`,`type`,`artist`,`set`,`rarity`,<br>`supertype`,`series`,`generation`,`id`,`page` | - |
