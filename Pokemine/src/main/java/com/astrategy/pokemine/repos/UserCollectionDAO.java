@@ -14,13 +14,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserCollectionDAO extends JpaRepository<UserCollection, UserCollectionId> {
-	
-	  // Trova la collezione dell'utente autenticato
-    UserCollection findByUserId(Optional<User> optional);
-
-    // Trova tutte le carte possedute dall'utente (attraverso la collezione)
-    List<Card> findCarteByUserId(int userId);
-
-
     List<UserCollection> findByUser(User user);
 }

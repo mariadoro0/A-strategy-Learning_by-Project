@@ -66,15 +66,4 @@ public class CardServiceImpl implements CardService {
         return dao.findAll(spec, pageable).getContent();
     }
 
-
-
-    @Override
-    public Optional<Card> getCardById(String id) {
-        return dao.findById(id);
-    }
-
-    @Override
-    public List<Card> getAllCards() {
-        return dao.findAll();
-    }
 }

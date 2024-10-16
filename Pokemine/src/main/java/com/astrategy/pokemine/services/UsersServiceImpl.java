@@ -47,13 +47,7 @@ public class UsersServiceImpl implements UserService{
 	public Optional<User> getUserById(int userId) {
 		return dao.findById(userId);
 	}
-	
-	// Method to update user details
-	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 	// Method to delete a user by their ID, with a check if the user exists
@@ -62,7 +56,7 @@ public class UsersServiceImpl implements UserService{
 		
 		 Optional<User> existingUser = dao.findById(id);
 		    
-		   if (!existingUser.isPresent()) {
+		   if (existingUser.isEmpty()) {
 		       
 		        throw new RuntimeException("L'utente non esiste e non può essere cancellato");
 		        

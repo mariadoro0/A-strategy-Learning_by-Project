@@ -1,4 +1,4 @@
-package com.astrategy.pokemine.entities
+package com.astrategy.pokemine.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;

@@ -122,8 +122,6 @@ public class DeckServiceImpl implements DeckService {
     public String validateDeck(int deckId) {
         Deck deck = findDeckById(deckId);
         //if there are 60 cards and at least one Basic Pokémon, it is valid
-        // so it comes back true
-        //deck.size();
         List<String> errors = new ArrayList<>();
         if(deck == null){
             throw new IllegalArgumentException("Deck not found.");
