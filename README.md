@@ -3,7 +3,8 @@
 
 | Endpoint                                         | Method   | Description                                | Parameters                                   | request body |
 |--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|---------|
-| `localhost:8008/cards`                           | GET      | Fetch all Cards                            | `name`,`type`,`artist`,`set`,`rarity`,<br>`supertype`,`generation` | - |                                                                                 
+| `localhost:8080/cards/`                           | GET      | Fetch all Cards                            | `name`,`type`,`artist`,`set`,`rarity`,<br>`supertype`,`series`,`generation`,`id`,`page` | - |
+| `localhost:8080/cards/page`                    | GET        | Fetch  First 100 Cards                           | `page`,                | yes |
 | `localhost:8080/users/signin`                    | POST        | Add new user                          | `username`,`email`,`password`                | yes |
 | `localhost:8080/users/deleteaccount`              | GET         | remove user with id                   | `id`                                         | yes |
 | `localhost:8080/collection/` | GET         | Fetch all Cards of collection         | `userid`                                         | yes
