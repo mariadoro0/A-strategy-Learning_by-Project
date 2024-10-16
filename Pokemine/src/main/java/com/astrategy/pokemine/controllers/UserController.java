@@ -15,7 +15,7 @@ import com.astrategy.pokemine.services.UserService;
 
 @RestController
 @RequestMapping("users")
-public class UsersController {
+public class UserController {
 	 
 	@Autowired
 	private UserService userService;
