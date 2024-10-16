@@ -36,33 +36,10 @@ public class UserCollectionController {
 		 } catch(Exception e){
 			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		 }
-/*
-	public ResponseEntity<String> addCard(@RequestBody UserCollectionId uid) {
-	    // Check if the user exists
-	    Optional<User> user = userService.getUserById(uid.getUserId());
-	    if (user.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
-	    }
-	
-	    // Check if the card exists
-		//to do
-	    Card card = cardService.getCardById(uid.getCardId());
-	    if (card == null) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carta non trovata");
-	    }
-	
-	    // Add card to collection
-	    service.addCardToCollection(uid);
-	    return ResponseEntity.ok("Carta aggiunta alla collezione");
 	}
-
 
 	 @PostMapping("{userId}/remove")
 	public ResponseEntity<String> removeCard(@PathVariable int userId, @RequestParam String cardId) {
-
-*/
-	 @PostMapping("remove")
-	public ResponseEntity<String> removeCard(@RequestParam int userId, @RequestParam String cardId) {
 		 try {
 			 service.removeCardToCollection(userId,cardId);
 			 return ResponseEntity.ok("Carta rimossa dalla collezione");
