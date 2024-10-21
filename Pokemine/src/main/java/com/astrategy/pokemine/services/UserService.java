@@ -18,4 +18,5 @@ public interface UserService {
 	
 	// Deletes a user by their unique user ID
 	void deleteById(int id);
+	void deactivateUser(int userId);
 }

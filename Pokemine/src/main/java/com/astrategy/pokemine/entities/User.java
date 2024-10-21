@@ -27,11 +27,13 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
+	private boolean isActive;
 	
 	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.isActive = true;
 	}
 
 	// One-to-Many relationship with the Deck entity.
