@@ -18,9 +18,10 @@ public class Abilities{
 	private String name;
 	private String text;
 	private String type;
-
+	
+	// Bidirectional Many-to-Many relationship with the `Card` entity
 	@ManyToMany(mappedBy="abilities")
-	@JsonBackReference
+	@JsonBackReference     // Prevents infinite recursion during JSON serialization
 	private Set<Card> cards;
 
 	

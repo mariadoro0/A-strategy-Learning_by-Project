@@ -20,25 +20,32 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Autowired
 	private UserCollectionDAO dao;
 	@Autowired 
-	private UserDAO usrdao;
+	private UserDAO userDAO;
 	@Autowired 
 	private CardDAO carddao;
 
+	// Method to add a card to the user's collection
 	@Override
-
 	public void addCardToCollection(int userId, String cardId) {
-	    User user = usrdao.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+		// Fetch the user by userId or throw an exception if not found
+	    User user = userDAO.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("User with id : " + userId+" not found."));
+	 // Fetch the card by cardId or throw an exception if not found
 	    Card card = carddao.findById(cardId)
-				.orElseThrow(() -> new IllegalArgumentException("Carta con id: " + cardId+" non trovata."));
+				.orElseThrow(() -> new IllegalArgumentException("Card with id: " + cardId+" not found."));
+	 // Create a composite key (UserCollectionId) for the user and card
 		UserCollectionId uid = new UserCollectionId(userId, cardId);
 
+		// Try to find the existing entry in the user's collection
 	    Optional<UserCollection> usercollection = dao.findById(uid);
+	    
+	    // If the card is already in the user's collection, increase the quantity
 	    if (usercollection.isPresent()) {
 	        UserCollection userCollection = usercollection.get();
 	        userCollection.setQuantity(userCollection.getQuantity() + 1);
 	        dao.save(userCollection);
 	    } else {
+	    	// If the card is not in the collection, create a new entry
 	        UserCollection userCollection = new UserCollection();
 	        userCollection.setId(uid);
 	        userCollection.setUser(user);
@@ -50,29 +57,40 @@ public class UserCollectionServiceImp implements UserCollectionService {
 
 	@Override
 	public void removeCardToCollection(int userId, String cardId) {
-		User user = usrdao.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+		// Fetch the user by userId or throw an exception if not found
+		User user = userDAO.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
+		// Fetch the card by cardId or throw an exception if not found
 		Card card = carddao.findById(cardId)
-				.orElseThrow(() -> new IllegalArgumentException("Carta con id: " + cardId+" non trovata."));
+				.orElseThrow(() -> new IllegalArgumentException("Card with id: " + cardId+" not found."));
+		// Create a composite key (UserCollectionId) for the user and card
 		UserCollectionId cid = new UserCollectionId(userId, cardId);
-		Optional<UserCollection> OuserCollection = dao.findById(cid);
-		if (OuserCollection.isPresent()) {
-			UserCollection userCollection = OuserCollection.get();
+		
+		// Try to find the existing entry in the user's collection
+		Optional<UserCollection> optionalUserCollection = dao.findById(cid);
+		
+		// If the card exists in the collection
+		if (optionalUserCollection.isPresent()) {
+			UserCollection userCollection = optionalUserCollection.get();
+			// If the user has more than one of the card, reduce the quantity by 1
 			if (userCollection.getQuantity() > 1) {
 				userCollection.setQuantity(userCollection.getQuantity() - 1);
 				dao.save(userCollection);
 			} else {
+				// If the quantity is 1 or less, remove the card from the collection
 				dao.delete(userCollection);
 			}
 		} else {
-			throw new RuntimeException("La carta non esiste nella collezione.");
+			throw new RuntimeException("The card does not exist in the collection.");
 		}
 	}
 
 	@Override
 	public List<UserCollection> getUserCollection(int userId) {
-		User user = usrdao.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+		// Fetch the user by userId or throw an exception if not found
+		User user = userDAO.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
+		// Retrieve the user's collection from the database
 			return dao.findByUser(user);
 	}
 }

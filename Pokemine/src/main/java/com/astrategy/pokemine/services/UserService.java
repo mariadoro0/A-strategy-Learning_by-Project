@@ -7,13 +7,15 @@ import com.astrategy.pokemine.entities.User;
 
 public interface UserService {
 
-	
+	 // Adds a new user to the system
 	void addUser(User user);
-
+	
+	// Retrieves a user by their email address
 	User getByEmail(String email);
 
-
+	// Retrieves a user by their unique user ID, wrapped in an Optional
 	Optional<User> getUserById(int userId);
 	
+	// Deletes a user by their unique user ID
 	void deleteById(int id);
 }

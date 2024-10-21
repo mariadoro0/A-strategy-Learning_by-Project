@@ -34,11 +34,18 @@ public class User {
 		this.password = password;
 	}
 
-
+	// One-to-Many relationship with the Deck entity.
+    // The decks field represents the user's decks, and the relationship is managed from the Deck entity (using mappedBy = "user").
+    // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
 	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,orphanRemoval = true)
     private Set<UserCollection> userCollection;
 
+	
+	
+	// One-to-Many relationship with the Deck entity.
+    // The decks field represents the user's decks, and the relationship is managed from the Deck entity (using mappedBy = "user").
+    // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-	private Set<Deck> decks = new LinkedHashSet<>();
+	private Set<Deck> decks = new LinkedHashSet<>(); // A collection of Deck objects representing the user's decks.
 }

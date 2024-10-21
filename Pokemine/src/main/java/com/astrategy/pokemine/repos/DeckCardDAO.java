@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DeckCardDAO extends JpaRepository<DeckCard, DeckCardId> {
-    List<DeckCard> findByDeck(Deck deck);
+    
+	// Method to find all DeckCard entries associated with a specific Deck.
+	List<DeckCard> findByDeck(Deck deck);
 }

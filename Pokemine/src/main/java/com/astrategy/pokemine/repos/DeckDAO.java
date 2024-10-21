@@ -10,6 +10,10 @@ import java.util.List;
 
 @Repository
 public interface DeckDAO extends JpaRepository<Deck, Integer> {
-    List<Deck> findByUserId(int userId);
+    
+	// Method to find all Decks associated with a specific user by user ID.
+	List<Deck> findByUserId(int userId);
+    
+    // Method to delete a Deck by its ID.
     void deleteById(int deckId);
 }

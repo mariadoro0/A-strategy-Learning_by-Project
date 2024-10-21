@@ -18,7 +18,8 @@ public class Deck {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "deck_id", nullable = false)
 	private Integer id;
-
+	
+	// Many-to-One relationship with the User entity, linking a deck to its owner. Marked with @JsonIgnore to prevent serialization in the JSON response.
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	@JsonIgnore
@@ -27,7 +28,8 @@ public class Deck {
 	private String deckName;
 	
 	private String deckDescription;
-
+	
+	// One-to-Many relationship with DeckCard entities, representing the cards contained in the deck. @JsonIgnore prevents infinite recursion in JSON responses.
 	@OneToMany(mappedBy = "deck", orphanRemoval = true)
 	@JsonIgnore
 	private Set<DeckCard> deckCards;
