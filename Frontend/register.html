@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css-main/nav.css">
+    <link rel="stylesheet" href="/css-register/register.css">
+      
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="losgo-home">
+            <!-- Logo -->
+            <a >
+                <img src="../static/img/logo.png" alt="Logo" class="nav-pic" width="90px" height="30px">
+            </a>
+
+            <!-- Link Home -->
+            <a class="home" href="#" >Home</a>
+        </div>
+        <div>
+            <a  class="nav-pic" href="about.html">Login</a>
+
+        </div>
+       
+     </nav>
+   
+
+
+	<br/>
+	<br/>
+	<br/>
+	<div class ="bic">
+    <div class="container">
+        <img src="../static/img/logo.png    " alt="Logo" class="logo">
+        <form class="register-form" method="post" th:action="@{/login}" role="form">
+
+            <input 
+                type="email" 
+                placeholder="Email" 
+                required 
+                id="email" 
+                name="email">
+            <input 
+                type="text" 
+                placeholder="Username" 
+                required 
+                id="username" 
+                name="username">
+            <input 
+                type="password" 
+                placeholder="Password" 
+                required 
+                id="password" 
+                name="password">
+            <button type="submit">Register</button>
+
+        </form>
+    </div>
+    </div>
+</body>
+</html>
