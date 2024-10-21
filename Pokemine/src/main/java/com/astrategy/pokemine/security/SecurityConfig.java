@@ -30,11 +30,12 @@ public class SecurityConfig{
     return httpSecurity
     		.csrf(AbstractHttpConfigurer::disable)
     		.authorizeHttpRequests(authorize -> {
-                      authorize.requestMatchers("/home", "/register/**","/users/**","pokemon/**").permitAll();
-                      authorize.requestMatchers("/user/**","/decks/**").hasRole("USER");
+                      authorize.requestMatchers("cards/**", "/users/**","collection/**","decks/**").permitAll();
+                      authorize.requestMatchers("/cards/**","/decks/**").hasRole("USER");
                       authorize.anyRequest().authenticated();
                       })
             .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+            //this part for thymeleaf auth with page
     	//	.formLogin((form)->
     		//	form.loginPage("/login")
     		// .permitAll() // Allow everyone to access the login page
