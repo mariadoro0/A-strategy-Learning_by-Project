@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
@@ -19,6 +21,7 @@ import com.astrategy.pokemine.services.UsersServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig{
 
     @Autowired
@@ -30,7 +33,7 @@ public class SecurityConfig{
     return httpSecurity
     		.csrf(AbstractHttpConfigurer::disable)
     		.authorizeHttpRequests(authorize -> {
-                      authorize.requestMatchers("cards/**", "/users/**","collection/**","decks/**").permitAll();
+                      authorize.requestMatchers("cards/**", "/users/**"/*,"collection/**","decks/**"*/).permitAll();
                       authorize.requestMatchers("/cards/**","/decks/**").hasRole("USER");
                       authorize.anyRequest().authenticated();
                       })
@@ -52,7 +55,7 @@ public class SecurityConfig{
         return userDetailService; //class da fare 
   }
   @Bean
-  public  AuthenticationProvider authenticationProvuder(){
+  public  AuthenticationProvider authenticationProvider(){
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
       provider.setUserDetailsService(userDetailService);
       provider.setPasswordEncoder(passwordEncoder());

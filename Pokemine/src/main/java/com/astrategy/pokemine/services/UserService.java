@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.services;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +13,12 @@ public interface UserService {
 
 	User getByEmail(String email);
 
+	User findByUsername(String username);
+
 
 	Optional<User> getUserById(int userId);
 	
 	void deleteById(int id);
+
+	boolean checkAuthorization(int userId, Principal p);
 }

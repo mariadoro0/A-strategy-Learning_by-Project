@@ -1,10 +1,16 @@
 package com.astrategy.pokemine.services;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import com.astrategy.pokemine.entities.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,20 +27,10 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
   
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Optional<User> user= Optional.of(dao.findByEmail(email));
-    if(user.isPresent()){
-      var userd = user.get();
-      return org.springframework.security.core.userdetails.User.builder()
-                 .username(userd.getUsername())
-                 .password(userd.getPassword())
-                 .roles("USER")
-                 .build();
-    }
-    else{
-      throw new UsernameNotFoundException(email);
-    }
-    
+    User user= dao.findByEmail(email);
+      return new CustomUserDetails(user);
   }
+
  	@Override
 	public void addUser(User user) {
 		
@@ -60,6 +56,13 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 		return dao.findByEmail(email);
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return dao.findByUsername(username);
+	}
+
+
+
 	// Method to retrieve a user by their ID
 	@Override
 	public Optional<User> getUserById(int userId) {
@@ -83,7 +86,12 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 		   dao.deleteById(id);
 	}
 
-	
+	@Override
+	public boolean checkAuthorization(int userId, Principal p) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        return userDetails.getId() == userId;
+    }
 
-	
+
 }
