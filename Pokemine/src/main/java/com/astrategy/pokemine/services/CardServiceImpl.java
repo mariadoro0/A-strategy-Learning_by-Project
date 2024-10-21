@@ -1,8 +1,10 @@
 package com.astrategy.pokemine.services;
 
+import com.astrategy.pokemine.dto.CardDTO;
 import com.astrategy.pokemine.entities.Card;
 import com.astrategy.pokemine.repos.CardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -23,7 +24,7 @@ public class CardServiceImpl implements CardService {
     private CardDAO dao;
     
     // Method to retrieve a list of cards based on various filters.
-    public List<Card> getByFilters(String Id, String name, String series,String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
+    public CardDTO getByFilters(String Id, String name, String series,String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
         Specification<Card> spec = (root, query, cb) -> {
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
             
@@ -66,7 +67,14 @@ public class CardServiceImpl implements CardService {
 
      // Creating a pageable object for pagination.
         Pageable pageable = PageRequest.of(page - 1, page_size);
-        return dao.findAll(spec, pageable).getContent();
+        Page<Card> cardPage = dao.findAll(spec, pageable);
+        // returns a DTO in order to store the page information.
+        return new CardDTO(
+                cardPage.getContent(),
+                page,
+                cardPage.getTotalPages(),
+                (int) cardPage.getTotalElements()
+        );
     }
 
 }
