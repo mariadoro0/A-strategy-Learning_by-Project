@@ -31,15 +31,15 @@ public class SecurityConfig{
     		.csrf(AbstractHttpConfigurer::disable)
     		.authorizeHttpRequests(authorize -> {
                       authorize.requestMatchers("/home", "/register/**","/users/**","pokemon/**").permitAll();
-                      authorize.requestMatchers("/user/**").hasRole("USER");
+                      authorize.requestMatchers("/user/**","/decks/**").hasRole("USER");
                       authorize.anyRequest().authenticated();
                       })
-            //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-    		.formLogin((form)-> 
-    			form.loginPage("/login")
-    		 .permitAll() // Allow everyone to access the login page
-             .defaultSuccessUrl("/home", true) // Redirect to /home after successful login
-     )
+            .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+    	//	.formLogin((form)->
+    		//	form.loginPage("/login")
+    		// .permitAll() // Allow everyone to access the login page
+           //  .defaultSuccessUrl("/home", true) // Redirect to /home after successful login
+    // )
     		
             .build();
 

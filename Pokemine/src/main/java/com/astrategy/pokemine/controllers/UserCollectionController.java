@@ -13,7 +13,7 @@ import com.astrategy.pokemine.services.UserCollectionService;
 
 
 @RestController
-@RequestMapping("collection")
+@RequestMapping("users/collection")
 public class UserCollectionController {
     @Autowired
     private UserCollectionService service;

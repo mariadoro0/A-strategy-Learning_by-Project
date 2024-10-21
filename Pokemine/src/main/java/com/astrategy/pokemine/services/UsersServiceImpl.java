@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.astrategy.pokemine.entities.User;
@@ -13,23 +17,21 @@ import com.astrategy.pokemine.repos.UserDAO;
 @Service
 public class UsersServiceImpl implements UserService, UserDetailsService {
 	@Autowired 
-	private UserDAO dao; 	
-	@Autowired 
-	private UserService service;
+	private UserDAO dao;
   
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-    Optional<UserEntity> user= Optional.of(dao.findByUsername(username));
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    Optional<User> user= Optional.of(dao.findByEmail(email));
     if(user.isPresent()){
       var userd = user.get();
-      return User.builder()
+      return org.springframework.security.core.userdetails.User.builder()
                  .username(userd.getUsername())
                  .password(userd.getPassword())
                  .roles("USER")
                  .build();
     }
     else{
-      throw new UsernameNotFoundException(username);
+      throw new UsernameNotFoundException(email);
     }
     
   }
