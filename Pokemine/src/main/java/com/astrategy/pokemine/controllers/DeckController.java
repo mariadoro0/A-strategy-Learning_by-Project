@@ -38,7 +38,7 @@ public class DeckController {
     @GetMapping("{userId}/{deckId}")
     public ResponseEntity<?> getDeckCards(@PathVariable int userId, @PathVariable int deckId) {
         try {
-            Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(userId, deckId); // Validates the specified deck
+            Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(userId, deckId); // Retrieves cards of the specified deck
             return new ResponseEntity<>(deckCards, HttpStatus.OK);
         }catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST); // Returns error message if an exception occurs
@@ -61,7 +61,7 @@ public class DeckController {
     @PostMapping("{userId}/{deckId}/add")
     public ResponseEntity<String> addCardToDeck(@PathVariable int userId, @PathVariable int deckId, @RequestParam String cardId) {
         try {
-            deckService.addCardToDeck(userId, deckId, cardId); // Calls service to remove the specified card from the deck
+            deckService.addCardToDeck(userId, deckId, cardId); // Calls service to add the specified card to the deck
             return new ResponseEntity<>("Card added to the deck", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST); // Returns error message if an exception occurs
@@ -72,7 +72,7 @@ public class DeckController {
     @PostMapping("{userId}/{deckId}/remove")
     public ResponseEntity<String> removeCardFromDeck(@PathVariable int userId, @PathVariable int deckId, @RequestParam String cardId) {
         try {
-            deckService.removeCardFromDeck(userId, deckId, cardId); // Calls service to add the specified card to the deck
+            deckService.removeCardFromDeck(userId, deckId, cardId); // Calls service to remove the specified card from the deck
             return new ResponseEntity<>("Card removed from the deck", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -99,28 +99,31 @@ public class DeckServiceImpl implements DeckService {
     	
     	// Validate user, card, and deck existence
         User user = userDAO.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId+" non trovato."));
+                .orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
         Card card = cardDAO.findById(cardId)
-                .orElseThrow(() -> new IllegalArgumentException("Carta non trovata con id: " + cardId));
+                .orElseThrow(() -> new IllegalArgumentException("Card with id: " + cardId+" not found."));
         Deck deck = deckDAO.findById(deckId)
-                .orElseThrow(() -> new IllegalArgumentException("Mazzo con id: " + deckId+" non trovato."));
+                .orElseThrow(() -> new IllegalArgumentException("Deck with id: " + deckId+" not found."));
      // Ensure the deck belongs to the user
         if(!user.equals(deck.getUser())){
-            throw new IllegalArgumentException("Il mazzo non appartiene all'utente selezionato");
+            throw new IllegalArgumentException("This deck does not belong to the selected user.");
         }
         DeckCardId id = new DeckCardId(deckId,cardId);
         Optional<DeckCard> record = deckCardDAO.findById(id);
         DeckCard cardToAdd;
+        // If the card quantity is 1, deletes the record
         if (record.isPresent()) {
             cardToAdd = record.get();
             if (cardToAdd.getQuantity() == 1){
                 deckCardDAO.delete(cardToAdd);
-            }else {
+            }else
+            // If the quantity is more than 1, subtracts 1
+            {
                 cardToAdd.setQuantity(cardToAdd.getQuantity() - 1);
                 deckCardDAO.save(cardToAdd);
             }
         } else {
-            throw new IllegalArgumentException("Carta non presente nel mazzo.");
+            throw new IllegalArgumentException("The selected card is not present in the deck.");
         }
     }
 
@@ -134,6 +137,7 @@ public class DeckServiceImpl implements DeckService {
     public String validateDeck(int deckId) {
         Deck deck = findDeckById(deckId);
         //if there are 60 cards and at least one Basic Pokémon, it is valid
+        // Instantiates a list of error strings in order to display the user eventual problems with the deck
         List<String> errors = new ArrayList<>();
         if(deck == null){
             throw new IllegalArgumentException("Deck not found.");
@@ -171,11 +175,11 @@ public class DeckServiceImpl implements DeckService {
     @Override
     public Map<String, Integer> getDeckCardsByDeckId(int userId,int deckId) {
         User user = userDAO.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Utente con id: " + userId + " non trovato."));
+                .orElseThrow(() -> new IllegalArgumentException("User with id: " + userId + " not found."));
         
         Deck deck = findDeckById(deckId);
         if (!user.equals(deck.getUser())) {
-            throw new IllegalArgumentException("Il mazzo non appartiene all'utente selezionato");
+            throw new IllegalArgumentException("This deck does not belong to the selected user.");
         }
         
      // Retrieve all DeckCard entities associated with this deck

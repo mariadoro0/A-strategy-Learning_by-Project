@@ -20,7 +20,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Autowired
 	private UserCollectionDAO dao;
 	@Autowired 
-	private UserDAO usrdao;
+	private UserDAO userDAO;
 	@Autowired 
 	private CardDAO carddao;
 
@@ -28,7 +28,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Override
 	public void addCardToCollection(int userId, String cardId) {
 		// Fetch the user by userId or throw an exception if not found
-	    User user = usrdao.findById(userId)
+	    User user = userDAO.findById(userId)
 				.orElseThrow(() -> new IllegalArgumentException("User with id : " + userId+" not found."));
 	 // Fetch the card by cardId or throw an exception if not found
 	    Card card = carddao.findById(cardId)
@@ -58,7 +58,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Override
 	public void removeCardToCollection(int userId, String cardId) {
 		// Fetch the user by userId or throw an exception if not found
-		User user = usrdao.findById(userId)
+		User user = userDAO.findById(userId)
 				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
 		// Fetch the card by cardId or throw an exception if not found
 		Card card = carddao.findById(cardId)
@@ -67,11 +67,11 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		UserCollectionId cid = new UserCollectionId(userId, cardId);
 		
 		// Try to find the existing entry in the user's collection
-		Optional<UserCollection> OuserCollection = dao.findById(cid);
+		Optional<UserCollection> optionalUserCollection = dao.findById(cid);
 		
 		// If the card exists in the collection
-		if (OuserCollection.isPresent()) {
-			UserCollection userCollection = OuserCollection.get();
+		if (optionalUserCollection.isPresent()) {
+			UserCollection userCollection = optionalUserCollection.get();
 			// If the user has more than one of the card, reduce the quantity by 1
 			if (userCollection.getQuantity() > 1) {
 				userCollection.setQuantity(userCollection.getQuantity() - 1);
@@ -88,7 +88,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	@Override
 	public List<UserCollection> getUserCollection(int userId) {
 		// Fetch the user by userId or throw an exception if not found
-		User user = usrdao.findById(userId)
+		User user = userDAO.findById(userId)
 				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
 		// Retrieve the user's collection from the database
 			return dao.findByUser(user);
