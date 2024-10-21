@@ -11,7 +11,7 @@ import com.astrategy.pokemine.repos.UserDAO;
 
 
 @Service
-public class UsersServiceImpl implements UserService{
+public class UsersServiceImpl implements UserService, UserDetailsService {
 	@Autowired 
 	private UserDAO dao; 
 
@@ -20,9 +20,24 @@ public class UsersServiceImpl implements UserService{
 	
 	@Autowired 
 	private UserService service;
-	
-
-	@Override
+  
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+    Optional<UserEntity> user= Optional.of(dao.findByUsername(username));
+    if(user.isPresent()){
+      var userd = user.get();
+      return User.builder()
+                 .username(userd.getUsername())
+                 .password(userd.getPassword())
+                 .roles("USER")
+                 .build();
+    }
+    else{
+      throw new UsernameNotFoundException(username);
+    }
+    
+  }
+ 	@Override
 	public void addUser(User user) {
 		
 		boolean existingUserByEmail = dao.existsByEmail(user.getEmail());
