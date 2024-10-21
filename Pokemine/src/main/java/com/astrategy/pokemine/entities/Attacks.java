@@ -26,9 +26,9 @@ public class Attacks {
 	private int convertedEnergyCost;
 	private String text;
 
-
+	// Bidirectional Many-to-Many relationship with the `Card` entity
 	@ManyToMany(mappedBy="attacks")
-	@JsonBackReference
+	@JsonBackReference   // Prevents infinite recursion during JSON serialization
 	private Set<Card> cards;
 
 

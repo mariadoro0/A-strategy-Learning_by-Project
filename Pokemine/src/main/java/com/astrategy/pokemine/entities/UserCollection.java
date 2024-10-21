@@ -22,18 +22,21 @@ public class UserCollection {
 	@EmbeddedId
 	private UserCollectionId id;
 	
+	 // Many-to-One relationship to the 'Card' entity, representing the card in the collection.
 	@ManyToOne
 	@MapsId("cardId")
-	@JoinColumn(name="card_id")
-	@JsonIgnore
+	@JoinColumn(name="card_id") // Foreign key reference to the 'Card' entity.
+	@JsonIgnore // Prevents the card reference from being serialized to JSON.
 	private Card card;
 	
+	// Many-to-One relationship to the 'User' entity, representing the owner of the card collection.
 	@ManyToOne
 	@MapsId("userId")
-	@JoinColumn(name="user_id")
-	@JsonIgnore
+	@JoinColumn(name="user_id") // Foreign key reference to the 'User' entity.
+	@JsonIgnore  // Prevents the user reference from being serialized to JSON.
 	private User user;
-
+	
+	// The number of this specific card the user has in their collection.
 	@Column(name ="quantity")
 	private int quantity ;
 

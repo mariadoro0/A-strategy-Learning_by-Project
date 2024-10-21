@@ -19,9 +19,11 @@ public class Weaknesses {
 	private int id;
 	private String type;
 	private String value;
+	
+	 // Defines a many-to-many relationship with the Card entity.
 	@ManyToMany(mappedBy="weaknesses")
-	@JsonBackReference
-	private Set<Card> cards;
+	@JsonBackReference // Prevents circular references during JSON serialization.
+	private Set<Card> cards; // A set of cards that have this weakness.
 
 
 }

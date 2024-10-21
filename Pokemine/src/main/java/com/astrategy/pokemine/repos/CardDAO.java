@@ -10,7 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface CardDAO extends JpaRepository<Card, String>, JpaSpecificationExecutor<Card> {
-    Optional<Card> findById(String Id);
+    
+	// Method to find a Card by its ID. The return type is Optional to handle cases where the Card may not be found.
+	Optional<Card> findById(String Id);
 
 
 }

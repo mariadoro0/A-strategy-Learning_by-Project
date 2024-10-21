@@ -14,16 +14,20 @@ import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
-
+	
+	// Constant for pagination size.
     private static final int page_size = 100;
-
+    
+    // Automatically injects the CardDAO dependency.
     @Autowired
     private CardDAO dao;
-
+    
+    // Method to retrieve a list of cards based on various filters.
     public List<Card> getByFilters(String Id, String name, String series,String artist, String type, String setName, String generation, String rarity, String supertype, int page) {
         Specification<Card> spec = (root, query, cb) -> {
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
-
+            
+         // Adding predicates based on non-null filter values.
             if (Id != null) {
                 predicates.add(cb.equal(root.get("id"), Id));
             }
@@ -60,7 +64,7 @@ public class CardServiceImpl implements CardService {
             return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
         };
 
-
+     // Creating a pageable object for pagination.
         Pageable pageable = PageRequest.of(page - 1, page_size);
         return dao.findAll(spec, pageable).getContent();
     }

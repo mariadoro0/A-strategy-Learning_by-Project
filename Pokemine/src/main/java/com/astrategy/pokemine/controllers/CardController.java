@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.astrategy.pokemine.entities.Card;
 import com.astrategy.pokemine.services.CardService;
-@RestController
-@RequestMapping("cards")
+@RestController // Indicates that this class is a REST controller
+@RequestMapping("cards") // Maps HTTP requests to /cards URL path
 public class CardController {
 	@Autowired
 	private CardService service;
+	
+	// HTTP GET method to retrieve cards based on various optional filters
 	@GetMapping("/")
 	public ResponseEntity<List<Card>> getCardByFilters(
 			@RequestParam(required = false) String id,
@@ -27,7 +29,7 @@ public class CardController {
 			@RequestParam(required = false) String supertype,
 			@RequestParam(required = false, defaultValue = "1") int page
 			) {
-	      
+		  // Calls the service method to get filtered cards and returns them in the response
 		return new ResponseEntity<List<Card>>(service.getByFilters(id,name, series, artist, type, set, generation, rarity, supertype, page),HttpStatus.OK);
 	}	
 	

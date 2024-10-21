@@ -20,9 +20,10 @@ public class Subtypes {
 	@Id
 	private int id;
 	private String name;
-
+	
+	// Many-to-Many relationship with the Card entity. Each subtype can be associated with multiple cards, and each card can have multiple subtypes.
 	@ManyToMany(mappedBy = "subtypes")
-	@JsonBackReference
+	@JsonBackReference  // Prevents cyclic references during JSON serialization for the bidirectional relationship.
 	private Set<Card> cards;
 
 }

@@ -27,7 +27,8 @@ public class UserCollectionId implements Serializable {
     
     @Column(name ="card_id")
     private String cardId;
-
+    
+ // Equals method: checks if two UserCollectionId objects are equal by comparing both userId and cardId.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,8 +38,10 @@ public class UserCollectionId implements Serializable {
                Objects.equals(cardId, that.cardId);
     }
 
+ 
+    // HashCode method: generates a hash code based on userId and cardId.
     @Override
     public int hashCode() {
-        return Objects.hash(userId, cardId);
+        return Objects.hash(userId, cardId); // Generate hash code using userId and cardId.
     }  
 }

@@ -14,5 +14,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserCollectionDAO extends JpaRepository<UserCollection, UserCollectionId> {
-    List<UserCollection> findByUser(User user);
+   
+	// Method to find all UserCollection entries associated with a specific User.
+	List<UserCollection> findByUser(User user);
 }
