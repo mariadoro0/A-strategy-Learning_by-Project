@@ -38,11 +38,22 @@ public class UserController {
 	public ResponseEntity<String> delete(@RequestParam int id) {
 	    try {
 	        userService.deleteById(id); // Calls the service to delete the user by ID
-	        return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+	        return new ResponseEntity<>("User deleted successfully.", HttpStatus.OK);
 	    } catch (Exception e) {
 	    	// Return error message with a 400 BAD REQUEST if an exception occurs
 	        return new ResponseEntity<>("Error: ID not present - " + e.getMessage(), HttpStatus.BAD_REQUEST);
 	    }
+	}
+	// GET method to delete a user account
+	@GetMapping("deactivate")
+	public ResponseEntity<String> deactivate(@RequestParam int id) {
+		try {
+			userService.deactivateUser(id); // Calls the service to deactivate the user by ID
+			return new ResponseEntity<>("Account deactivated successfully.", HttpStatus.OK);
+		} catch (Exception e) {
+			// Return error message with a 400 BAD REQUEST if an exception occurs
+			return new ResponseEntity<>("Error: ID not present - " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 		
 }
