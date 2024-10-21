@@ -19,11 +19,13 @@ public class UserController {
 	 
 	@Autowired
 	private UserService userService;
-
+  @Autowired
+  private PasswordEncoder passEncoder;
 	
 	@PostMapping("signin")
     public ResponseEntity<String> add(@RequestBody User user) {
         try {
+            user.setPassword(passEncoder.encode(user.getPassword()));
             userService.addUser(user);
             return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
