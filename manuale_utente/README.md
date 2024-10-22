@@ -16,6 +16,7 @@ Una volta aperto Pokemine ti troverai nella homepage, dove ti suggeriamo di fare
 ### HOME
 Completata la fase di autenticazione si verrà riportati nella homepage, dove verranno visualizzate delle carte. Utilizza la barra di ricerca per cercare una specifica carta oppure clicca sul tasto dei filtri posizionato a destra della barra di ricerca per aggiungere informazioni sulla ricerca.
 - Clicca sulla carta per visualizzarne i dettagli, oppure usa i tasti di gestione per aggiungerla alla collezione o ai deck.
+![Pokemine logo](/manuale_utente/pics/mycards2.png)
 ![Pokemine logo](/manuale_utente/pics/filters.png)
 
 ### COLLEZIONE
@@ -25,6 +26,8 @@ Una delle funzionalità di Pokemine è creare la propria collezione di carte. In
 
 ### MAZZI
 Un'altra funzionalità di Pokemine sono i mazzi. Andando in "my decks" in alto a destra, si accede a una sezione apposita per creare, modificare o semplicemente visualizzare i tuoi decks.
+![Pokemine logo](/manuale_utente/pics/mydecks.png)
+- Clicca su "new deck" per creare un nuovo mazzo;
 ![Pokemine logo](/manuale_utente/pics/deckcreation.png)
 - Nella sezione "deck info" è possibile visualizzare i dettagli sul deck, la descrizione, ed eventualmente anche eliminare il deck.
 ![Pokemine logo](/manuale_utente/pics/deckinfo.png)
