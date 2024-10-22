@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Card Collection</title>
+    <link rel="stylesheet" href="./css/login-css/login.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="logo-home">
+            <!-- Logo -->
+            <a >
+                <img src="./img/logo.png" alt="Logo" class="nav-pic" width="90px" height="30px">
+            </a>
+
+            <!-- Link Home -->
+            <a class="home" href="#" >Home</a>
+        </div>
+       
+       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+         <div class="navbar-nav">
+            <a><img class="im" src="./img/ita-flag.png" width="30px" height="20px"></a> 
+            <a href=""><img class="im" src="./img/en-flag.png" width="30px" height="20px"></a>
+         </div>
+       </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+
+    <div class ="bic">
+        <div class="container">
+            <img src="../static/img/logo.png" alt="Logo" class="logo">
+            <form class="login-form" method="post" th:action="@{/login}" role="form">
+                <input 
+                    type="text" 
+                    placeholder="Username" 
+                    required 
+                    id="username" 
+                    name="username">
+                <input 
+                    type="password" 
+                    placeholder="Password" 
+                    required 
+                    id="password" 
+                    name="password">
+                <button type="submit">accede</button>
+            </form>
+        </div>
+        </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
