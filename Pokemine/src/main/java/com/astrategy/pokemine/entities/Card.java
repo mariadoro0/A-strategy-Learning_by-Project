@@ -18,7 +18,8 @@ public class Card {
 	
 	@Id
 	private String id;
-	
+
+	@Column(name="set_name")
 	private String setName;
 	
 	private String series;
@@ -41,6 +42,7 @@ public class Card {
 	private String supertype;
 
     /*level is set as a String because few cards have level 'X'*/
+	@Column(name="card_level")
 	private String cardLevel;
 
     /*used Integer instead of int so it accepts NULL values*/
