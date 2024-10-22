@@ -31,7 +31,6 @@
 }
 .register-form input {
     margin-bottom: 40px;
-    
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -53,19 +52,11 @@
 }
 
 .register-form {
-    margin-top: 100px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
 }
 
-.register-form button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
 .register-form button:hover {
     background-color: #0056b3;

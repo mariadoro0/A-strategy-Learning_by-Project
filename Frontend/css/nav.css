@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+   /* padding: 1rem; */
     flex-wrap: wrap;
 }
 
@@ -29,9 +29,14 @@ body {
 }
 
 .home {
-   /* margin-right: auto; /* Usa auto per un layout più fluido */
-    margin-right: 0; /* Rimuovi il margine grande */
-    margin-left: 20px; /* Aggiungi un piccolo margine sinistro per separare dal logo */
+    color:white;
+   /* margin-right: auto; /* Use auto for a more fluid layout */
+    margin-right: 0; /* Remove large margin */
+    margin-left: 20px; /* Add a small left margin to separate from the logo */
+    text-decoration: none;
+    border: 2px solid #535353;
+    border-radius: 10px;
+    padding: 5px;
 
 }
 
@@ -81,7 +86,16 @@ body {
 .profile button:hover {
     background-color: #0056b3;
 }
-
+#logind {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #ddd;
+   }
+   #logind a:hover {
+       background-color: #555;
+       border-radius: 5px;
+   }
 /* Media query per schermi più piccoli */
 @media (max-width: 768px) {
     .navbar {

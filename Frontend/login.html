@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Card Collection</title>
+    <title>Login</title>
     <link rel="stylesheet" href="./css/login-css/login.css">
 
 </head>
@@ -13,7 +13,7 @@
         <div class="logo-home">
             <!-- Logo -->
             <a >
-                <img src="./img/logo.png" alt="Logo" class="nav-pic" width="90px" height="30px">
+                <img src="./img/logo.png" alt="Logo" class="nav-pic" width="100px" height="50px">
             </a>
 
             <!-- Link Home -->
@@ -33,14 +33,14 @@
 
     <div class ="bic">
         <div class="container">
-            <img src="../static/img/logo.png" alt="Logo" class="logo">
-            <form class="login-form" method="post" th:action="@{/login}" role="form">
+            <img src="./img/logo.png" alt="Logo" class="logo">
+            <form class="login-form" method="post" role="form">
                 <input 
                     type="text" 
-                    placeholder="Username" 
+                    placeholder="Email" 
                     required 
-                    id="username" 
-                    name="username">
+                    id="email" 
+                    name="email">
                 <input 
                     type="password" 
                     placeholder="Password" 
