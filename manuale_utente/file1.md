@@ -5,7 +5,7 @@ Quello che segue è una guida su come usare Pokemine correttamente:
 ### LOGIN
 Una volta aperto Pokemine ti troverai nella homepage, dove ti suggeriamo di fare l'accesso per poter sfruttare tutte le funzioni del sito e non perdere i tuoi progressi; in alternativa puoi continuare come ospite ma i tuoi progressi andranno persi. Per eseguire l'accesso ti basterà:
 - Cliccare sull'icona "login" in alto a destra.
-![Pokemine logo](./A-strategy-Learning_by-Project/manuale_utente/pics/home1.png)
+![Pokemine logo](/manuale_utente/pics/home1.png)
 
 - Successivamente si viene portati nella pagina di autenticazione. Se non sei registrato a Pokemine, ti consigliamo di cliccare la scritta evidenziata in rosso "registrati ora".
 ![Pokemine logo](./A-strategy-Learning_by-Project/manuale_utente/pics/login.png)
