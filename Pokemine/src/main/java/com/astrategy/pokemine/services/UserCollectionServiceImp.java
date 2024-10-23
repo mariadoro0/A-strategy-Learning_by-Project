@@ -29,7 +29,7 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	public void addCardToCollection(int userId, String cardId) {
 		// Fetch the user by userId or throw an exception if not found
 	    User user = userDAO.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("User with id : " + userId+" not found."));
+				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
 	 // Fetch the card by cardId or throw an exception if not found
 	    Card card = carddao.findById(cardId)
 				.orElseThrow(() -> new IllegalArgumentException("Card with id: " + cardId+" not found."));
@@ -37,11 +37,11 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		UserCollectionId uid = new UserCollectionId(userId, cardId);
 
 		// Try to find the existing entry in the user's collection
-	    Optional<UserCollection> usercollection = dao.findById(uid);
+	    Optional<UserCollection> optionalUserCollection = dao.findById(uid);
 	    
 	    // If the card is already in the user's collection, increase the quantity
-	    if (usercollection.isPresent()) {
-	        UserCollection userCollection = usercollection.get();
+	    if (optionalUserCollection.isPresent()) {
+	        UserCollection userCollection = optionalUserCollection.get();
 	        userCollection.setQuantity(userCollection.getQuantity() + 1);
 	        dao.save(userCollection);
 	    } else {

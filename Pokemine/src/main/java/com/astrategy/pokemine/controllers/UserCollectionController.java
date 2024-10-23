@@ -20,14 +20,14 @@ public class UserCollectionController {
     
     // GET method to retrieve the user's card collection
 	@GetMapping("{userId}")
-	public ResponseEntity<List<UserCollection>> getCards(@PathVariable int userId) {
+	public ResponseEntity<?> getCards(@PathVariable int userId) {
 		// Fetch the user's collection from the service
-	    List<UserCollection> collection = service.getUserCollection(userId);
-	    if (collection == null) { // Check if the collection is null or empty
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-	    }
-	    // Return the collection with a 200 OK status
-	    return new ResponseEntity<>(collection, HttpStatus.OK); 
+		try {
+			List<UserCollection> collection = service.getUserCollection(userId);
+			return new ResponseEntity<>(collection, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	// POST method to add a card to the user's collection
