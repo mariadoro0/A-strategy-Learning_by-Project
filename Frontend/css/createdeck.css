@@ -4,8 +4,8 @@ body{
     font: 'https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap';
 }
 .container {
-    width: 1500px;
-    height: 1000px;
+    width: 1000px;
+    height: 900px;
     background-color: white;
     padding: 20px;
    
@@ -47,15 +47,15 @@ h1{
 
 #description{
 
-    width: 1000px;
+    width: 500px;
     height: 200px;
     margin-left: 25px;
     margin-top: 50px;
     border-radius: 15px; /* Arrotonda gli angoli */
     border: 1px solid lightgrey; /* Colore e stile del bordo */
-    min-width: 1000px;
+    min-width: 700px;
     min-height: 200px;
-    max-width: 1000px;
+    max-width: 700px;
     max-height: 200px;
     
    
@@ -79,7 +79,7 @@ button{
     border-radius: 5px; /* Arrotonda gli angoli */
     border: 1px solid black; /* Colore e stile del bordo */
     float: right;
-    margin-top: 425px;
+    margin-top: 300px;
     margin-right: 50px;
 
 
